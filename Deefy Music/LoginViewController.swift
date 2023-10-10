@@ -19,6 +19,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loginTextField.isSecureTextEntry = true
+        
         // If there are email and password in the user defaults
         if let email = UserDefaults.standard.value(forKey: "email") as? String, let password = UserDefaults.standard.value(forKey: "password") as? String {
             // Fill the text fields
