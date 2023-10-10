@@ -15,6 +15,7 @@
 		5F4EF5AA2AD53523007AAD82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EF5A82AD53523007AAD82 /* LaunchScreen.storyboard */; };
 		5F90405B2AD545B400800D38 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90405A2AD545B400800D38 /* RegisterViewController.swift */; };
 		5F90405D2AD545F700800D38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90405C2AD545F700800D38 /* LoginViewController.swift */; };
+		A0E453A72AD58DCD008ACA2B /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E453A62AD58DCD008ACA2B /* HomeCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		5F4EF5AB2AD53523007AAD82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F90405A2AD545B400800D38 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		5F90405C2AD545F700800D38 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A0E453A62AD58DCD008ACA2B /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				5F4EF59D2AD53522007AAD82 /* AppDelegate.swift */,
 				5F4EF59F2AD53522007AAD82 /* SceneDelegate.swift */,
 				5F4EF5A12AD53522007AAD82 /* ViewController.swift */,
+				A0E453A62AD58DCD008ACA2B /* HomeCollectionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				5F4EF5A22AD53522007AAD82 /* ViewController.swift in Sources */,
 				5F4EF59E2AD53522007AAD82 /* AppDelegate.swift in Sources */,
 				5F4EF5A02AD53522007AAD82 /* SceneDelegate.swift in Sources */,
+				A0E453A72AD58DCD008ACA2B /* HomeCollectionViewController.swift in Sources */,
 				5F90405D2AD545F700800D38 /* LoginViewController.swift in Sources */,
 				5F90405B2AD545B400800D38 /* RegisterViewController.swift in Sources */,
 			);
