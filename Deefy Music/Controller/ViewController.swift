@@ -11,10 +11,16 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         // Do any additional setup after loading the view.
 
         if (UserDefaults.standard.bool(forKey: "isLogged")) {
-           self.navigationController?.pushViewController(HomeCollectionViewController(), animated: true)
+            if let collectionViewController = storyboard.instantiateViewController(withIdentifier: "homeView") as? HomeCollectionViewController {
+                let flowLayout = UICollectionViewFlowLayout()
+                collectionViewController.collectionView.collectionViewLayout = flowLayout
+                self.navigationController?.pushViewController(collectionViewController, animated: true)
+            }
+//           self.navigationController?.pushViewController(HomeCollectionViewController(), animated: true)
         }
     }
 

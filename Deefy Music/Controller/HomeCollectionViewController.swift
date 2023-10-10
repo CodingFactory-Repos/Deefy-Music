@@ -12,18 +12,20 @@ private let reuseIdentifier = "Cell"
 class HomeCollectionViewController: UICollectionViewController {
 
     var image = UIImage(named: "Haikyuuu")
-    var image2 = UIImage(named: "experiences")
+    var image2 = UIImage(named: "Experiences")
     var image3 = UIImage(named: "Darius")
     var image4 = UIImage(named: "Garen")
-    var image5 = UIImage(named: "arte")
+//    var image5 = UIImage(named: "arte")
     var image6 = UIImage(named: "android")
 
-    var playlist = [image, image2, image3, image4, image5, image6]
+    var playlist = [Any]()
 //    var Image = UIImage(name: "Haikyuuu")
 //    var Image2 = UIImage(name: "experiences")
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        playlist = [image!, image2!, image3!, image4!, image6!]
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -60,8 +62,12 @@ class HomeCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewHome", for: indexPath)
 
-        let imageView = cell.viewWithTag(1) as! UIImageView
-        imageView.image = self.playlist[indexPath.row] as? UIImage
+        if let imageView = cell.viewWithTag(1) as? UIImageView {
+            imageView.image = self.playlist[indexPath.row] as? UIImage
+        } else {
+            print("imageView not found")
+        }
+
 
     
         // Configure the cell
