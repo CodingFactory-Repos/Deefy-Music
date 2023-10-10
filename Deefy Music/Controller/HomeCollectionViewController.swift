@@ -11,21 +11,9 @@ private let reuseIdentifier = "Cell"
 
 class HomeCollectionViewController: UICollectionViewController {
 
-    var image = UIImage(named: "Haikyuuu")
-    var image2 = UIImage(named: "Experiences")
-    var image3 = UIImage(named: "Darius")
-    var image4 = UIImage(named: "Garen")
-//    var image5 = UIImage(named: "arte")
-    var image6 = UIImage(named: "android")
-
-    var playlist = [Any]()
-//    var Image = UIImage(name: "Haikyuuu")
-//    var Image2 = UIImage(name: "experiences")
-
+var images : [Images] = [Images(image: "Haikyuuu", name: "Haikyuuu"), Images(image: "Experiences", name: "Experiences"), Images(image: "Darius", name: "Darius"), Images(image: "Garen", name: "Garen"), Images(image: "android", name: "android"),Images(image: "Haikyuuu", name: "Haikyuuu"), Images(image: "Experiences", name: "Experiences"), Images(image: "Darius", name: "Darius"), Images(image: "Garen", name: "Garen"), Images(image: "android", name: "android")]
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        playlist = [image!, image2!, image3!, image4!, image6!]
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -56,17 +44,23 @@ class HomeCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return self.playlist.count
+        return self.images.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewHome", for: indexPath)
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewHome", for: indexPath)
+//
+//        if let imageView = cell.viewWithTag(100) as? UIImageView {
+//            imageView.image = self.images[indexPath.row]
+//        } else {
+//            print("imageView not found")
+//        }
 
-        if let imageView = cell.viewWithTag(1) as? UIImageView {
-            imageView.image = self.playlist[indexPath.row] as? UIImage
-        } else {
-            print("imageView not found")
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewHome", for: indexPath) as! MyImagesCollectionViewCell
+
+        let imageView = images[indexPath.row]
+            cell.MyImage.image = UIImage(named: imageView.image)
+
 
 
     
