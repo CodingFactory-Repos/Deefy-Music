@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
 
         if (UserDefaults.standard.bool(forKey: "isLogged")) {
-            print("JE SUIS LOGGED")
+           self.navigationController?.pushViewController(HomeCollectionViewController(), animated: true)
         }
     }
 
