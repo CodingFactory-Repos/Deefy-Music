@@ -4,7 +4,6 @@
 
 import Foundation
 
-
 public class SpotifyAPIManager {
 
     public init() {
@@ -80,20 +79,20 @@ public class SpotifyAPIManager {
             if let data = data {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    let items = (json as! [String: Any])as! [String: Any]
+                    let items = (json as! [String: Any]) as! [String: Any]
 
                     let items2 = items["items"] as! [[String: Any]]
                     for item in items2 {
-                        var titleAlbum = Album(id: "", name: "", artists: "", image: "", releaseDate: "", totalTracks: 0)
                         self.getAlbumFromId(albumId: albumId) { album in
-                            titleAlbum = album
-                        }
-                        let track = Music(title: item["name"] as! String, artists: item["artists"] as Any, album: titleAlbum as Album, duration: item["duration_ms"] as! Int)
-                        tracks.append(track)
-                    }
+                            let titleAlbum = album
+                            let track = Music(title: item["name"] as! String, artists: item["artists"] as Any, album: titleAlbum as Album, duration: item["duration_ms"] as! Int)
+                            tracks.append(track)
 
-                    print(tracks.count)
-                    completion(tracks)
+                            if tracks.count == items2.count {
+                                completion(tracks)
+                            }
+                        }
+                    }
                 } catch {
                     print("JSON error: \(error.localizedDescription)")
                 }

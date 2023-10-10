@@ -83,31 +83,47 @@ class ViewController: UIViewController {
                         for subview in self.view.subviews {
                             subview.removeFromSuperview()
                         }
-
-                        print(tracks)
-
                         // Display the tracks as a list
                         var y = 0
                         for track in tracks {
                             let label = UILabel(frame: CGRect(x: 0, y: y, width: Int(self.view.frame.width), height: 20))
-                            label.text = track.title
+                            // For each artists retrieve their name
+                            var artists = ""
+                            for artist in track.artists as! [[String: Any]] {
+                                artists += artist["name"] as! String
+                                artists += "|"
+                            }
+                            // Get the album
+                            let album = track.album.name
+                            print(track.album)
+                            label.text = track.title + " - " + artists.split(separator: "|").joined(separator: ", ")
+                            label.accessibilityIdentifier = track.title + " - " + artists.split(separator: "|").joined(separator: ", ") + " - " + album // Set the accessibilityIdentifier to the track's title
                             self.view.addSubview(label)
-                            y += 20
+                            y += 40
+
+                            // Add a tap gesture recognizer to each label
+                            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.launchMusic(tapGestureRecognizer:)))
+                            label.isUserInteractionEnabled = true
+                            label.addGestureRecognizer(tapGestureRecognizer)
                         }
                     }
-
                 }
-                // Fetch and display album details (e.g., tracks) here
-                // Call your SpotifyAPIManager's method to fetch album details
-                // Example:
-                // spotifyAPIManager.getTracksFromAlbum(albumId: album.id) { tracks in
-                //     // Handle the retrieved tracks and display album details
-                // }
             }
         }
         // Retrieve the tracks from the API
     }
+
+    @objc func launchMusic(tapGestureRecognizer: UITapGestureRecognizer) {
+        if let tappedLabel = tapGestureRecognizer.view as? UILabel {
+            if let trackTitle = tappedLabel.accessibilityIdentifier {
+                // You can access the track's title here
+                let youtubeApiManager = YoutubeAPIManager()
+                youtubeApiManager.launchMusic(params: trackTitle)
+            }
+        }
+    }
 }
+
 
 extension UIImageView {
     func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {

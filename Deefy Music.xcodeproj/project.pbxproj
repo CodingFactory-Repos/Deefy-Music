@@ -17,6 +17,7 @@
 		5F90405D2AD545F700800D38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90405C2AD545F700800D38 /* LoginViewController.swift */; };
 		924BA2D94D25B1D6CF796280 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA306FEF0ED3198923E7B /* Album.swift */; };
 		924BA72F7345B149EE247AD0 /* SpotifyAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA11AFD0DB4639EFA869D /* SpotifyAPIManager.swift */; };
+		924BA9FA3C1E1C2D629B46A8 /* YoutubeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */; };
 		924BAEFC047DDDBC7A93D166 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 924BAB03ACFC735D8F08DD72 /* secrets.json */; };
 		924BAF7F83F620CD0DE15E2F /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA8D4DC786D978573CBF4 /* Music.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		924BA306FEF0ED3198923E7B /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		924BA8D4DC786D978573CBF4 /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		924BAB03ACFC735D8F08DD72 /* secrets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = secrets.json; sourceTree = "<group>"; };
+		924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeAPIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				5F4EF59F2AD53522007AAD82 /* SceneDelegate.swift */,
 				5F4EF5A12AD53522007AAD82 /* ViewController.swift */,
 				924BA11AFD0DB4639EFA869D /* SpotifyAPIManager.swift */,
+				924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				924BAF7F83F620CD0DE15E2F /* Music.swift in Sources */,
 				924BA2D94D25B1D6CF796280 /* Album.swift in Sources */,
 				924BA72F7345B149EE247AD0 /* SpotifyAPIManager.swift in Sources */,
+				924BA9FA3C1E1C2D629B46A8 /* YoutubeAPIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
