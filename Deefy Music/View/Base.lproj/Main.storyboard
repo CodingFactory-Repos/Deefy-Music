@@ -265,6 +265,84 @@
             </objects>
             <point key="canvasLocation" x="5016.0305343511445" y="-35.211267605633807"/>
         </scene>
+        <!--Home-->
+        <scene sceneID="0tq-Q7-EEP">
+            <objects>
+                <viewController storyboardIdentifier="Home" id="1Q2-YQ-753" customClass="HomeViewController" customModule="Deefy_Music" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SAA-44-UGX">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gJg-Ch-Gol">
+                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1ua-ZC-tFp">
+                                    <size key="itemSize" width="167" height="175"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="suG-dv-GYH" customClass="HomeCollectionViewCell" customModule="Deefy_Music" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QKP-YU-QIT">
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fq9-jw-NNq">
+                                                    <rect key="frame" x="5" y="0.0" width="170" height="179"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghk-FT-0Zb">
+                                                    <rect key="frame" x="10" y="179" width="160" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="ghk-FT-0Zb" secondAttribute="trailing" constant="10" id="1jO-oW-t4L"/>
+                                                <constraint firstItem="ghk-FT-0Zb" firstAttribute="top" secondItem="fq9-jw-NNq" secondAttribute="bottom" id="4Df-4k-ZTX"/>
+                                                <constraint firstItem="fq9-jw-NNq" firstAttribute="top" secondItem="QKP-YU-QIT" secondAttribute="top" id="PBr-H4-yFy"/>
+                                                <constraint firstAttribute="trailing" secondItem="fq9-jw-NNq" secondAttribute="trailing" constant="5" id="b8p-oe-gNc"/>
+                                                <constraint firstItem="fq9-jw-NNq" firstAttribute="leading" secondItem="QKP-YU-QIT" secondAttribute="leading" constant="5" id="c59-dL-RBd"/>
+                                                <constraint firstItem="ghk-FT-0Zb" firstAttribute="leading" secondItem="QKP-YU-QIT" secondAttribute="leading" constant="10" id="fhT-tv-h2B"/>
+                                                <constraint firstAttribute="bottom" secondItem="ghk-FT-0Zb" secondAttribute="bottom" id="sHa-ad-7we"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="180" height="200"/>
+                                        <connections>
+                                            <outlet property="ImagesCell" destination="fq9-jw-NNq" id="dVc-kS-zly"/>
+                                            <outlet property="labelImage" destination="ghk-FT-0Zb" id="XcG-3O-ZlV"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="1Q2-YQ-753" id="KUi-VS-Hje"/>
+                                    <outlet property="delegate" destination="1Q2-YQ-753" id="kS3-YD-l8g"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Kws-44-xRH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gJg-Ch-Gol" firstAttribute="top" secondItem="Kws-44-xRH" secondAttribute="top" id="0bN-iH-qph"/>
+                            <constraint firstItem="Kws-44-xRH" firstAttribute="trailing" secondItem="gJg-Ch-Gol" secondAttribute="trailing" id="3pl-dE-gGq"/>
+                            <constraint firstItem="gJg-Ch-Gol" firstAttribute="trailing" secondItem="Kws-44-xRH" secondAttribute="trailing" id="NNs-18-6D8"/>
+                            <constraint firstItem="gJg-Ch-Gol" firstAttribute="leading" secondItem="Kws-44-xRH" secondAttribute="leading" id="ha7-FN-L7H"/>
+                            <constraint firstItem="Kws-44-xRH" firstAttribute="bottom" secondItem="gJg-Ch-Gol" secondAttribute="bottom" id="uQX-kq-ojj"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="pfX-2e-avg"/>
+                    <navigationItem key="navigationItem" title="Home" id="pBt-Er-NUE"/>
+                    <connections>
+                        <outlet property="HomeCollectionView" destination="gJg-Ch-Gol" id="iqZ-fS-1hb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="feQ-Kh-YjC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4117" y="715"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="20Y-TJ-h5o">
             <objects>
@@ -301,6 +379,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PlX-Wq-udL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4089.3129770992364" y="-35.211267605633807"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="cTX-EL-1OB">
+            <objects>
+                <tabBarController storyboardIdentifier="tabBar" automaticallyAdjustsScrollViewInsets="NO" id="CN2-8a-WKP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5HC-Xp-jTz">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="1Q2-YQ-753" kind="relationship" relationship="viewControllers" id="yvu-bh-F6h"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N3N-hq-1BU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3111" y="715"/>
         </scene>
     </scenes>
     <resources>
