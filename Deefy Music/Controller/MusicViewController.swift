@@ -17,32 +17,39 @@ class MusicViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
-    func playAudio(){
         guard let url = URL(string:"https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-10.mp3")
         else{
             print("url not found")
             return
         }
         print("url found")
-        
+
         do {
             audioPlayer = try AVPlayer(url: url as URL)
 
-            audioPlayer?.play()
         } catch let error {
             print(error)
         }
-      
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+
+
     @IBAction func Play(_ sender: Any) {
-        playAudio()
+
+    print(audioPlayer?.rate as Any)
+        if audioPlayer?.rate == nil || audioPlayer?.rate == 0{
+            audioPlayer?.play()
+            print("play")
+            playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            print("pause")
+            audioPlayer?.pause()
+            playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            print(audioPlayer.currentTime().seconds)
+        }
     }
 
     /*
