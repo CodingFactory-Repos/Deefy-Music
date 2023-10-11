@@ -25,7 +25,7 @@ class MusicViewController: UIViewController {
         print("url found")
 
 //        update slider every second
-        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
 
         do {
             audioPlayer = try AVPlayer(url: url as URL)
@@ -36,6 +36,7 @@ class MusicViewController: UIViewController {
             print(error)
         }
 
+//        keep playing when leaving the app
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
             print("Playback OK")
@@ -52,8 +53,10 @@ class MusicViewController: UIViewController {
 
 
     @IBAction func Play(_ sender: Any) {
-
-    print(audioPlayer?.rate)
+        print(audioPlayer?.rate)
+        if audioPlayer.currentItem?.currentTime().seconds == audioPlayer.currentItem?.asset.duration.seconds{
+            audioPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
+        }
         if audioPlayer?.rate == 0{
             audioPlayer?.play()
             print("play")
@@ -71,6 +74,9 @@ class MusicViewController: UIViewController {
 
     @objc func updateSlider(){
         musicSlider.value = Float(audioPlayer.currentTime().seconds)
+        if audioPlayer.currentItem?.currentTime().seconds == audioPlayer.currentItem?.asset.duration.seconds{
+            playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
     }
 
     /*
