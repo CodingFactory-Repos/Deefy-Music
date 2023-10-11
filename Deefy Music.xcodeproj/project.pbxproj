@@ -15,6 +15,13 @@
 		5F4EF5AA2AD53523007AAD82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F4EF5A82AD53523007AAD82 /* LaunchScreen.storyboard */; };
 		5F90405B2AD545B400800D38 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90405A2AD545B400800D38 /* RegisterViewController.swift */; };
 		5F90405D2AD545F700800D38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90405C2AD545F700800D38 /* LoginViewController.swift */; };
+		924BA2D94D25B1D6CF796280 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA306FEF0ED3198923E7B /* Album.swift */; };
+		924BA72F7345B149EE247AD0 /* SpotifyAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA11AFD0DB4639EFA869D /* SpotifyAPIManager.swift */; };
+		924BA9FA3C1E1C2D629B46A8 /* YoutubeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */; };
+		924BAB2615129A0D2EF77B6E /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BABE8B69B3716098DE296 /* Artist.swift */; };
+		924BAC25F0ABA8F681148DDD /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA16E8A8C3E2BD0ECA1F1 /* Playlist.swift */; };
+		924BAEFC047DDDBC7A93D166 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 924BAB03ACFC735D8F08DD72 /* secrets.json */; };
+		924BAF7F83F620CD0DE15E2F /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA8D4DC786D978573CBF4 /* Music.swift */; };
 		9B2201A83514E422D6CD62A0 /* App.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2206F88CA288E5555175A5 /* App.storyboard */; };
 		9B22052D747D04FAE68ABF85 /* MyImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B220D0CD105AF2A4AE4CD7B /* MyImages.swift */; };
 		9B220FC55085D4174946395A /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B220F30F17AAB7051BF0F1D /* Search.swift */; };
@@ -25,11 +32,6 @@
 		FFA440F82AD6B2DC006AAA3F /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA440F72AD6B2DC006AAA3F /* MusicViewController.swift */; };
 		FFA466792AD5F19B00EBAB7D /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA466782AD5F19B00EBAB7D /* HomeCollectionViewCell.swift */; };
 		FFA4667B2AD5F2A100EBAB7D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA4667A2AD5F2A100EBAB7D /* HomeViewController.swift */; };
-		924BA2D94D25B1D6CF796280 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA306FEF0ED3198923E7B /* Album.swift */; };
-		924BA72F7345B149EE247AD0 /* SpotifyAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA11AFD0DB4639EFA869D /* SpotifyAPIManager.swift */; };
-		924BA9FA3C1E1C2D629B46A8 /* YoutubeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */; };
-		924BAEFC047DDDBC7A93D166 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 924BAB03ACFC735D8F08DD72 /* secrets.json */; };
-		924BAF7F83F620CD0DE15E2F /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA8D4DC786D978573CBF4 /* Music.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,13 @@
 		5F4EF5AB2AD53523007AAD82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F90405A2AD545B400800D38 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		5F90405C2AD545F700800D38 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		924BA11AFD0DB4639EFA869D /* SpotifyAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyAPIManager.swift; sourceTree = "<group>"; };
+		924BA16E8A8C3E2BD0ECA1F1 /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
+		924BA306FEF0ED3198923E7B /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		924BA8D4DC786D978573CBF4 /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		924BAB03ACFC735D8F08DD72 /* secrets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = secrets.json; sourceTree = "<group>"; };
+		924BABE8B69B3716098DE296 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeAPIManager.swift; sourceTree = "<group>"; };
 		9B2202D36B5218E81264DA8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/App.storyboard; sourceTree = "<group>"; };
 		9B220D0CD105AF2A4AE4CD7B /* MyImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyImages.swift; sourceTree = "<group>"; };
 		9B220F30F17AAB7051BF0F1D /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
@@ -53,11 +62,6 @@
 		FFA440F72AD6B2DC006AAA3F /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		FFA466782AD5F19B00EBAB7D /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFA4667A2AD5F2A100EBAB7D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		924BA11AFD0DB4639EFA869D /* SpotifyAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyAPIManager.swift; sourceTree = "<group>"; };
-		924BA306FEF0ED3198923E7B /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
-		924BA8D4DC786D978573CBF4 /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
-		924BAB03ACFC735D8F08DD72 /* secrets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = secrets.json; sourceTree = "<group>"; };
-		924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeAPIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 				9B220F30F17AAB7051BF0F1D /* Search.swift */,
 				924BA8D4DC786D978573CBF4 /* Music.swift */,
 				924BA306FEF0ED3198923E7B /* Album.swift */,
+				924BABE8B69B3716098DE296 /* Artist.swift */,
+				924BA16E8A8C3E2BD0ECA1F1 /* Playlist.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -154,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				5F4EF5A62AD53523007AAD82 /* Assets.xcassets */,
-				FF94224C2AD6E23300F35EC2 /* beep.mp3 */,
+				FF94224C2AD6E23300F35EC2,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -218,7 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F4EF5AA2AD53523007AAD82 /* LaunchScreen.storyboard in Resources */,
-				FF94224D2AD6E23300F35EC2 /* beep.mp3 in Resources */,
+				FF94224D2AD6E23300F35EC2,
 				5F4EF5A72AD53523007AAD82 /* Assets.xcassets in Resources */,
 				5F4EF5A52AD53522007AAD82 /* Main.storyboard in Resources */,
 				9B2201A83514E422D6CD62A0 /* App.storyboard in Resources */,
@@ -251,6 +257,8 @@
 				924BA2D94D25B1D6CF796280 /* Album.swift in Sources */,
 				924BA72F7345B149EE247AD0 /* SpotifyAPIManager.swift in Sources */,
 				924BA9FA3C1E1C2D629B46A8 /* YoutubeAPIManager.swift in Sources */,
+				924BAB2615129A0D2EF77B6E /* Artist.swift in Sources */,
+				924BAC25F0ABA8F681148DDD /* Playlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
