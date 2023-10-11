@@ -42,11 +42,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         return 70
     }
 
-//        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Music") as? MusicViewController {
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
-//      }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as? MusicViewController {
+            self.present(vc, animated:true, completion: nil)
+        }
+      }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
