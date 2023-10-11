@@ -12,14 +12,36 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var SearchTableView: UITableView!
 
-    var search: [Search] = [Search(image: "Haikyuuu", artist: "Haruichi", title: "Haikyuuu"), Search(image: "Darius", artist: "Riot", title: "Darius"), Search(image: "Haikyuuu", artist: "Haruichi", title: "Haikyuuu"), Search(image: "Haikyuuu", artist: "Haruichi", title: "Haikyuuu"), Search(image: "Haikyuuu", artist: "Haruichi", title: "Haikyuuu"), Search(image: "Haikyuuu", artist: "Haruichi", title: "Haikyuuu"), Search(image: "Haikyuuu", artist: "Haruichi", title: "Haikyuuu")]
+    var search: [Search] = []
     var filteredData: [Search]!
+    var helpText = "You can search for artists, albums, playlists or songs."
+    var welcomeText = "Listen to your favorite music."
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Search"
 
+
+       // Append an empty search
         filteredData = search
+
+        if (filteredData.isEmpty) {
+            let welcomeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            welcomeLabel.text = welcomeText
+            welcomeLabel.textColor = UIColor.black
+            welcomeLabel.textAlignment = NSTextAlignment.center
+            self.SearchTableView.backgroundView = welcomeLabel
+
+            // Add an help label to explain how to search just below the welcome label
+            let helpLabel = UILabel(frame: CGRect(x: 0, y: -30, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            helpLabel.text = helpText
+            helpLabel.textColor = UIColor.gray
+            helpLabel.textAlignment = NSTextAlignment.center
+            self.SearchTableView.backgroundView?.addSubview(helpLabel)
+
+            self.SearchTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        }
         SearchTableView.dataSource = self
         SearchTableView.delegate = self
         searchBar.delegate = self
@@ -34,7 +56,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell") as! SearchTableViewCell
         cell.Title.text = filteredData[indexPath.row].title
         cell.Artist.text = filteredData[indexPath.row].artist
-        cell.MusicImage.image = UIImage(named: filteredData[indexPath.row].image)
+        cell.MusicImage.downloaded(from: filteredData[indexPath.row].image)
         return cell
     }
 
@@ -48,19 +70,73 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         }
       }
 
+    var searchTask: DispatchWorkItem?
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-        filteredData = []
-        if searchText == "" {
-            filteredData = search
-        } else {
-            for search in search {
-                if search.title.lowercased().contains(searchText.lowercased()) {
-                    filteredData.append(search)
+        if searchText.isEmpty {
+            filteredData = []
+            SearchTableView.reloadData()
+            helpText = "You can search for artists, albums, playlists or songs."
+            welcomeText = "Listen to your favorite music."
+            searchTask?.cancel()
+            return
+        }
+        searchTask?.cancel()
+
+        // Create a new search task
+        searchTask = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+
+            self.filteredData = []
+
+            let spotifyAPIManager = SpotifyAPIManager()
+            spotifyAPIManager.searchForItem(query: searchText, offset: 0) { search in
+                if (search.count == 0) {
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "No Results", message: "No search results were found for \(searchText)", preferredStyle: .alert)
+
+                        // Add an OK button to the alert
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+                        // Present the alert on the main thread
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                } else {
+                    for item in search {
+                        self.makeAppearItem(item["item"]!)
+
+                        // Update the UI on the main queue
+                        DispatchQueue.main.async {
+                            self.SearchTableView.reloadData()
+                        }
+                    }
                 }
             }
         }
-        self.SearchTableView.reloadData()
+
+        // Schedule the new search task to execute after 3 seconds
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1, execute: searchTask!)
+    }
+
+    func makeAppearItem(_ item: Any) {
+        if let music = item as? Music {
+
+            let authorAndFeats = music.artists as! [[String: Any]]
+            let author = authorAndFeats[0]["name"] as! String
+
+            self.filteredData.append(Search(image: music.album.image, artist: "Music · \(author)", title: music.title))
+        } else if let artist = item as? Artist {
+            // Append the artist to the filteredData
+            self.filteredData.append(Search(image: artist.image, artist: "Seek profile",  title: artist.name))
+        } else if let album = item as? Album {
+            // Append the album to the filteredData
+            let authorAndFeats = album.artists as! [[String: Any]]
+            let author = authorAndFeats[0]["name"] as! String
+
+            self.filteredData.append(Search(image: album.image, artist: "Album · \(author) ", title: album.name))
+        } else if let playlist = item as? Playlist {
+            self.filteredData.append(Search(image: playlist.image, artist: "Playlist · \(playlist.owner["display_name"] as! String)", title: playlist.name))
+        }
     }
 
 /*
