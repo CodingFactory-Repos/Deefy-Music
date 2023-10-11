@@ -11,28 +11,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        // Do any additional setup after loading the view.
+        self.hidesBottomBarWhenPushed = false
+        self.tabBarController?.tabBar.isHidden = false
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if (UserDefaults.standard.bool(forKey: "isLogged")) {
-//            if let collectionViewController = storyboard.instantiateViewController(withIdentifier: "homeView") as? HomeCollectionViewController {
-//                let flowLayout = UICollectionViewFlowLayout()
-//                collectionViewController.collectionView.collectionViewLayout = flowLayout
-//                self.navigationController?.pushViewController(collectionViewController, animated: true)
-//            }
-//           self.navigationController?.pushViewController(HomeCollectionViewController(), animated: true)
-
-//            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? HomeViewController {
-////                self.present(vc, animated:true, completion: nil)
-//                self.navigationController?.pushViewController(vc, animated: true)
-//            }
-
-             let collectionViewController = storyboard.instantiateViewController(withIdentifier: "tabBar")
-                self.navigationController?.pushViewController(collectionViewController, animated: true)
-
+            let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBar")
+            self.navigationController?.pushViewController(tabBarController, animated: true)
         }
     }
 
 
 }
-
