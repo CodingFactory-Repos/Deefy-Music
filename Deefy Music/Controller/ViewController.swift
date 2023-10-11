@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -15,6 +16,8 @@ class ViewController: UIViewController {
 
         // Inside your viewDidLoad method
         if (UserDefaults.standard.bool(forKey: "isLogged")) {
+
+
             let spotifyAPIManager = SpotifyAPIManager()
 
             // Call retrieveSpotifyNewAlbums with a completion handler
@@ -96,8 +99,8 @@ class ViewController: UIViewController {
                             // Get the album
                             let album = track.album.name
                             print(track.album)
-                            label.text = track.title + " - " + artists.split(separator: "|").joined(separator: ", ")
-                            label.accessibilityIdentifier = track.title + " - " + artists.split(separator: "|").joined(separator: ", ") + " - " + album // Set the accessibilityIdentifier to the track's title
+                            label.text = track.title + " - " + artists.split(separator: "|").joined(separator: ",")
+                            label.accessibilityIdentifier = track.title + " - " + artists.split(separator: "|").joined(separator: ",") + " - " + album // Set the accessibilityIdentifier to the track's title
                             self.view.addSubview(label)
                             y += 40
 
