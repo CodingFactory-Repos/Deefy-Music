@@ -157,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				5F4EF5A62AD53523007AAD82 /* Assets.xcassets */,
-				FF94224C2AD6E23300F35EC2,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -221,7 +220,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F4EF5AA2AD53523007AAD82 /* LaunchScreen.storyboard in Resources */,
-				FF94224D2AD6E23300F35EC2,
 				5F4EF5A72AD53523007AAD82 /* Assets.xcassets in Resources */,
 				5F4EF5A52AD53522007AAD82 /* Main.storyboard in Resources */,
 				9B2201A83514E422D6CD62A0 /* App.storyboard in Resources */,

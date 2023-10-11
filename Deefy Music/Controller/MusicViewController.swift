@@ -11,9 +11,9 @@ import AVKit
 
 class MusicViewController: UIViewController {
 
+    @IBOutlet weak var musicSlider: UISlider!
     @IBOutlet weak var playButton: UIButton!
     var audioPlayer: AVPlayer!
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +24,24 @@ class MusicViewController: UIViewController {
         }
         print("url found")
 
+//        update slider every second
+        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+
         do {
             audioPlayer = try AVPlayer(url: url as URL)
+            print(audioPlayer.currentItem!.asset.duration.seconds)
+            musicSlider.maximumValue = Float(audioPlayer.currentItem!.asset.duration.seconds)
 
         } catch let error {
+            print(error)
+        }
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            print("Playback OK")
+            try AVAudioSession.sharedInstance().setActive(true)
+            print("Session is Active")
+        } catch {
             print(error)
         }
     }
@@ -39,8 +53,8 @@ class MusicViewController: UIViewController {
 
     @IBAction func Play(_ sender: Any) {
 
-    print(audioPlayer?.rate as Any)
-        if audioPlayer?.rate == nil || audioPlayer?.rate == 0{
+    print(audioPlayer?.rate)
+        if audioPlayer?.rate == 0{
             audioPlayer?.play()
             print("play")
             playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
@@ -48,8 +62,15 @@ class MusicViewController: UIViewController {
             print("pause")
             audioPlayer?.pause()
             playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            print(audioPlayer.currentTime().seconds)
         }
+    }
+
+    @IBAction func ChangeAudioTime(_ sender: Any) {
+        audioPlayer.seek(to: CMTime(seconds: Double(musicSlider.value), preferredTimescale: 1))
+    }
+
+    @objc func updateSlider(){
+        musicSlider.value = Float(audioPlayer.currentTime().seconds)
     }
 
     /*
