@@ -6,7 +6,7 @@ class YoutubeAPIManager {
     func launchMusic(params: String) {
         // Retrieve the best match
         let bestMatch = retrieveBestMatch(params: params)
-        
+
         if let music = bestMatch {
             // Start the music with the found match
             downloadMusic(music: music)
@@ -38,7 +38,7 @@ class YoutubeAPIManager {
         ]
 
         // Create the HTTP request
-        if let request = createURLRequestWithParameters(parameters: parameters) {
+        if let request = createURLMusicRequestWithParameters(parameters: parameters) {
             // Execute the request and get data
             return executeRequest(request: request)
         }
@@ -77,7 +77,7 @@ class YoutubeAPIManager {
     }
 
     // Function to create the URLRequest
-    func createURLRequestWithParameters(parameters: [String: String]) -> URLRequest? {
+    func createURLMusicRequestWithParameters(parameters: [String: String]) -> URLRequest? {
         let url = URL(string: "https://yt1s.com/api/ajaxSearch/index")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
@@ -166,6 +166,124 @@ class YoutubeAPIManager {
     }
 
     func downloadMusic(music: [String: Any]) {
+        print("Attempting to download music...")
+        let parameters: [String: String] = [
+            "q": "https://www.youtube.com/watch?v=\(music["v"]!)",
+            "vt": "mp3"
+        ]
 
+        // Create the HTTP request to https://yt1s.com/api/ajaxConvert/convert on post
+        if let request = createURLDownloadMusicParameters(parameters: parameters) {
+            // Execute the request and get data
+            if let data = executeRequest(request: request) {
+                if let json = parseDLData(data: data) {
+                    // Get the highest quality from the available ones in json["mp3"]
+                    if let mp3 = json["mp3"] as? [String: Any] {
+                        // Check the keys and get the highest number (128, 256, 320)
+                        var highestQuality = 0
+                        var highestQualityKey = ""
+                        for (key, music) in mp3 {
+                            if let keyInt = Int(key) {
+                                if keyInt > highestQuality {
+                                    highestQuality = keyInt
+                                    if let musicDictionary = music as? [String: Any] {
+                                        highestQualityKey = musicDictionary["k"] as! String
+                                    }
+                                }
+                            }
+                        }
+                        self.downloadMusicFromKey(key: highestQualityKey, musicId: music["v"] as! String)
+                    }
+                }
+            }
+        }
+    }
+
+    func downloadMusicFromKey(key: String, musicId: String) {
+//        print(musicId)
+//        print(key)
+    print("Attempting to download music from key...")
+        let parameters: [String: String] = [
+            "vid": musicId,
+            "k": key
+        ]
+        // Url https://yt1s.com/api/ajaxConvert/convert to post
+        if let request = createURLDownloadMusicFromKeyParameters(params: parameters) {
+            if let data = executeRequest(request: request) {
+                if let json = parseDLFromKeyData(data: data) {
+                    print(json)
+                    // Get the download link
+                    if let downloadLink = json["dlink"] as? String {
+                        // Download the music
+//                        downloadMusicFromLink(link: downloadLink)
+                    }
+                }
+            }
+        }
+    }
+
+    func createURLDownloadMusicFromKeyParameters(params: [String: String]) -> URLRequest? {
+        let url = URL(string: "https://yt1s.com/api/ajaxConvert/convert")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
+        // Create the query string from parameters
+        if let query = createQueryWithParameters(parameters: params) {
+            let parameterData = Data(query.utf8)
+            request.httpBody = parameterData
+            return request
+        }
+
+        return nil
+    }
+
+    func parseDLFromKeyData(data: Data) -> [String: Any]? {
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                print(json)
+                if let dlink = json["dlink"] as? String {
+                    return ["dlink": dlink]
+                } else {
+                    print("The 'dlink' key is not a valid String.")
+                    return nil
+                }
+            } else {
+                print("Invalid JSON format in response.")
+                return nil
+            }
+        } catch {
+            print("JSON parsing error: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+
+
+    func parseDLData(data: Data) -> [String: Any]? {
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            return json?["links"] as Any as? [String: Any]
+        } catch {
+            print("JSON parsing error: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    func createURLDownloadMusicParameters(parameters: [String: String]) -> URLRequest? {
+//        print(parameters)
+        let url = URL(string: "https://yt1s.com/api/ajaxSearch/index")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
+        // Create the query string from parameters
+        if let query = createQueryWithParameters(parameters: parameters) {
+            let parameterData = Data(query.utf8)
+            request.httpBody = parameterData
+            return request
+        }
+
+        return nil
     }
 }
