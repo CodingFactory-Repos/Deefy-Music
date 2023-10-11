@@ -11,13 +11,16 @@ import AVKit
 
 class MusicViewController: UIViewController {
 
+    @IBOutlet weak var currentLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var musicSlider: UISlider!
     @IBOutlet weak var playButton: UIButton!
     var audioPlayer: AVPlayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let url = URL(string:"https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-10.mp3")
+
+        guard let url = URL(string:"https://youtube-api.loule.me/tmp/zBh3QWU6Ynw.mp3")
         else{
             print("url not found")
             return
@@ -31,6 +34,7 @@ class MusicViewController: UIViewController {
             audioPlayer = try AVPlayer(url: url as URL)
             print(audioPlayer.currentItem!.asset.duration.seconds)
             musicSlider.maximumValue = Float(audioPlayer.currentItem!.asset.duration.seconds)
+            durationLabel.text = String(format:"%02i:%02i", Int(audioPlayer.currentItem!.asset.duration.seconds) / 60 % 60, Int(audioPlayer.currentItem!.asset.duration.seconds) % 60)
 
         } catch let error {
             print(error)
@@ -54,8 +58,12 @@ class MusicViewController: UIViewController {
 
     @IBAction func Play(_ sender: Any) {
         print(audioPlayer?.rate)
-        if audioPlayer.currentItem?.currentTime().seconds == audioPlayer.currentItem?.asset.duration.seconds{
-            audioPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
+        let tolerance = 0.1 // tolerance in seconds
+        if let currentTime = audioPlayer.currentItem?.currentTime().seconds,
+           let duration = audioPlayer.currentItem?.asset.duration.seconds {
+            if abs(currentTime - duration) <= tolerance {
+                audioPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
+            }
         }
         if audioPlayer?.rate == 0{
             audioPlayer?.play()
@@ -74,8 +82,14 @@ class MusicViewController: UIViewController {
 
     @objc func updateSlider(){
         musicSlider.value = Float(audioPlayer.currentTime().seconds)
-        if audioPlayer.currentItem?.currentTime().seconds == audioPlayer.currentItem?.asset.duration.seconds{
-            playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        currentLabel.text = String(format:"%02i:%02i", Int(audioPlayer.currentTime().seconds) / 60 % 60, Int(audioPlayer.currentTime().seconds) % 60)
+
+        let tolerance = 0.1 // tolerance in seconds
+        if let currentTime = audioPlayer.currentItem?.currentTime().seconds,
+           let duration = audioPlayer.currentItem?.asset.duration.seconds {
+            if abs(currentTime - duration) <= tolerance {
+                playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            }
         }
     }
 
