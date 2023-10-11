@@ -7,49 +7,38 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 class MusicViewController: UIViewController {
 
     @IBOutlet weak var playButton: UIButton!
-    var audioPlayer = AVPlayer()
-    private var player: AVPlayer?
-    var playerItem:AVPlayerItem?
+    var audioPlayer: AVPlayer!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 
-    func playVideo(){
-        guard let url = URL(string:"url")
-        else{
-            print("url not found")
-            return
-        }
-
-        let player = AVPlayer(url:url)
-//        let controller = AVPlayerViewController()
-//        controller.player = player
-//        present(controller, animated: true) {
-            player.play()
-//        }
-    }
-
     func playAudio(){
-        guard let url = URL(string:"https://s3.amazonaws.com/kargopolov/kukushka.mp3")
+        guard let url = URL(string:"https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-10.mp3")
         else{
             print("url not found")
             return
         }
         print("url found")
-        let audioPlayer = AVPlayer(url: url)
+        
+        do {
+            audioPlayer = try AVPlayer(url: url as URL)
 
-        audioPlayer.play()
+            audioPlayer?.play()
+        } catch let error {
+            print(error)
+        }
+      
     }
 
     @IBAction func Play(_ sender: Any) {
