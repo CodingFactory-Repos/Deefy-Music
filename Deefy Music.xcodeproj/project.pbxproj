@@ -18,6 +18,8 @@
 		9B2201A83514E422D6CD62A0 /* App.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2206F88CA288E5555175A5 /* App.storyboard */; };
 		9B22052D747D04FAE68ABF85 /* MyImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B220D0CD105AF2A4AE4CD7B /* MyImages.swift */; };
 		9B220FC55085D4174946395A /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B220F30F17AAB7051BF0F1D /* Search.swift */; };
+		A0554A072AD6DCEA00A8B024 /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0554A062AD6DCEA00A8B024 /* LikedViewController.swift */; };
+		A0554A092AD6DD3000A8B024 /* LikedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0554A082AD6DD3000A8B024 /* LikedTableViewCell.swift */; };
 		FFA440F22AD691FC006AAA3F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA440F12AD691FC006AAA3F /* SearchViewController.swift */; };
 		FFA440F42AD693E2006AAA3F /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA440F32AD693E2006AAA3F /* SearchTableViewCell.swift */; };
 		FFA440F82AD6B2DC006AAA3F /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA440F72AD6B2DC006AAA3F /* MusicViewController.swift */; };
@@ -39,6 +41,8 @@
 		9B2202D36B5218E81264DA8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/App.storyboard; sourceTree = "<group>"; };
 		9B220D0CD105AF2A4AE4CD7B /* MyImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyImages.swift; sourceTree = "<group>"; };
 		9B220F30F17AAB7051BF0F1D /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		A0554A062AD6DCEA00A8B024 /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LikedViewController.swift; path = "Deefy Music/View/LikedViewController.swift"; sourceTree = SOURCE_ROOT; };
+		A0554A082AD6DD3000A8B024 /* LikedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedTableViewCell.swift; sourceTree = "<group>"; };
 		FFA440F12AD691FC006AAA3F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FFA440F32AD693E2006AAA3F /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		FFA440F72AD6B2DC006AAA3F /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 		A0E4539F2AD5890E008ACA2B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A0554A062AD6DCEA00A8B024 /* LikedViewController.swift */,
 				FFA440F72AD6B2DC006AAA3F /* MusicViewController.swift */,
 				FFA440F32AD693E2006AAA3F /* SearchTableViewCell.swift */,
 				FFA440F12AD691FC006AAA3F /* SearchViewController.swift */,
@@ -106,6 +111,7 @@
 				5F90405A2AD545B400800D38 /* RegisterViewController.swift */,
 				5F90405C2AD545F700800D38 /* LoginViewController.swift */,
 				5F4EF5A12AD53522007AAD82 /* ViewController.swift */,
+				A0554A082AD6DD3000A8B024 /* LikedTableViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -212,11 +218,13 @@
 				FFA440F82AD6B2DC006AAA3F /* MusicViewController.swift in Sources */,
 				5F4EF5A22AD53522007AAD82 /* ViewController.swift in Sources */,
 				5F4EF59E2AD53522007AAD82 /* AppDelegate.swift in Sources */,
+				A0554A092AD6DD3000A8B024 /* LikedTableViewCell.swift in Sources */,
 				5F4EF5A02AD53522007AAD82 /* SceneDelegate.swift in Sources */,
 				FFA440F22AD691FC006AAA3F /* SearchViewController.swift in Sources */,
 				5F90405D2AD545F700800D38 /* LoginViewController.swift in Sources */,
 				FFA4667B2AD5F2A100EBAB7D /* HomeViewController.swift in Sources */,
 				FFA466792AD5F19B00EBAB7D /* HomeCollectionViewCell.swift in Sources */,
+				A0554A072AD6DCEA00A8B024 /* LikedViewController.swift in Sources */,
 				5F90405B2AD545B400800D38 /* RegisterViewController.swift in Sources */,
 				9B22052D747D04FAE68ABF85 /* MyImages.swift in Sources */,
 				FFA440F42AD693E2006AAA3F /* SearchTableViewCell.swift in Sources */,
