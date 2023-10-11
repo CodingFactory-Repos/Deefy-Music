@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Deefy Music.iml" filepath="$PROJECT_DIR$/.idea/Deefy Music.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Swift-DeefyMusic.iml" filepath="$PROJECT_DIR$/.idea/Swift-DeefyMusic.iml" />
     </modules>
   </component>
 </project>
