@@ -18,10 +18,11 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if (UserDefaults.standard.bool(forKey: "isLogged")) {
-            let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBar")
+            let tabBarController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "tabBar")
             self.navigationController?.pushViewController(tabBarController, animated: true)
         }
     }
 
 
 }
+
