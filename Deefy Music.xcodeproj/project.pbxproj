@@ -19,6 +19,11 @@
 		924BA2D94D25B1D6CF796280 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA306FEF0ED3198923E7B /* Album.swift */; };
 		924BA72F7345B149EE247AD0 /* SpotifyAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA11AFD0DB4639EFA869D /* SpotifyAPIManager.swift */; };
 		924BA9FA3C1E1C2D629B46A8 /* YoutubeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */; };
+		924BA2D94D25B1D6CF796280 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA306FEF0ED3198923E7B /* Album.swift */; };
+		924BA72F7345B149EE247AD0 /* SpotifyAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA11AFD0DB4639EFA869D /* SpotifyAPIManager.swift */; };
+		924BA9FA3C1E1C2D629B46A8 /* YoutubeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */; };
+		924BAB2615129A0D2EF77B6E /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BABE8B69B3716098DE296 /* Artist.swift */; };
+		924BAC25F0ABA8F681148DDD /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA16E8A8C3E2BD0ECA1F1 /* Playlist.swift */; };
 		924BAEFC047DDDBC7A93D166 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 924BAB03ACFC735D8F08DD72 /* secrets.json */; };
 		924BAF7F83F620CD0DE15E2F /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BA8D4DC786D978573CBF4 /* Music.swift */; };
 		9B2201A83514E422D6CD62A0 /* App.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2206F88CA288E5555175A5 /* App.storyboard */; };
@@ -50,6 +55,12 @@
 		924BA306FEF0ED3198923E7B /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		924BA8D4DC786D978573CBF4 /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		924BAB03ACFC735D8F08DD72 /* secrets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = secrets.json; sourceTree = "<group>"; };
+		924BA11AFD0DB4639EFA869D /* SpotifyAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyAPIManager.swift; sourceTree = "<group>"; };
+		924BA16E8A8C3E2BD0ECA1F1 /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
+		924BA306FEF0ED3198923E7B /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		924BA8D4DC786D978573CBF4 /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		924BAB03ACFC735D8F08DD72 /* secrets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = secrets.json; sourceTree = "<group>"; };
+		924BABE8B69B3716098DE296 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeAPIManager.swift; sourceTree = "<group>"; };
 		9B2202D36B5218E81264DA8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/App.storyboard; sourceTree = "<group>"; };
 		9B22035F5B323E0B3D1F325C /* secrets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = secrets.json; sourceTree = "<group>"; };
@@ -114,6 +125,8 @@
 				9B220F30F17AAB7051BF0F1D /* Search.swift */,
 				924BA8D4DC786D978573CBF4 /* Music.swift */,
 				924BA306FEF0ED3198923E7B /* Album.swift */,
+				924BABE8B69B3716098DE296 /* Artist.swift */,
+				924BA16E8A8C3E2BD0ECA1F1 /* Playlist.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -259,6 +272,8 @@
 				924BA2D94D25B1D6CF796280 /* Album.swift in Sources */,
 				924BA72F7345B149EE247AD0 /* SpotifyAPIManager.swift in Sources */,
 				924BA9FA3C1E1C2D629B46A8 /* YoutubeAPIManager.swift in Sources */,
+				924BAB2615129A0D2EF77B6E /* Artist.swift in Sources */,
+				924BAC25F0ABA8F681148DDD /* Playlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
