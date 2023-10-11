@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -15,6 +16,8 @@ class ViewController: UIViewController {
 
         // Inside your viewDidLoad method
         if (UserDefaults.standard.bool(forKey: "isLogged")) {
+
+
             let spotifyAPIManager = SpotifyAPIManager()
 
             // Call retrieveSpotifyNewAlbums with a completion handler
@@ -22,7 +25,7 @@ class ViewController: UIViewController {
                 // Handle the retrieved albums here
                 // This code block will execute when the data is ready
                 // You can use 'albums' to update your UI or perform other tasks
-                print(albums)
+//                print(albums)
 
                 // Clear the page
                 DispatchQueue.main.async {
@@ -40,23 +43,90 @@ class ViewController: UIViewController {
                     // Display the images as a grid of 3x3
                     var x = 0
                     var y = 0
-                    for album in albums.prefix(9) { // Display up to 9 albums
+                    for album in albums.prefix(9) {
                         let imageView = UIImageView(frame: CGRect(x: x, y: y, width: Int(imageViewWidth), height: Int(imageViewHeight)))
                         imageView.downloaded(from: album.image)
+
+                        // Associate album data with the image view using a custom property
+                        imageView.accessibilityIdentifier = album.id
+
                         self.view.addSubview(imageView)
+
                         x += Int(imageViewWidth)
                         if x == Int(imageViewWidth) * 3 {
                             x = 0
                             y += Int(imageViewHeight)
                         }
+
+                        // Add a tap gesture recognizer to each image view
+                        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:)))
+                        imageView.isUserInteractionEnabled = true
+                        imageView.addGestureRecognizer(tapGestureRecognizer)
                     }
                 }
-
             }
         }
 
     }
+
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        if let tappedImageView = tapGestureRecognizer.view as? UIImageView {
+            // Identify which album was tapped based on the image view's tag or custom property
+            if let album = tappedImageView.accessibilityIdentifier {
+                // You can access album details here and display them
+                print("Album tapped: \(album)")
+
+                let spotifyAPIManager = SpotifyAPIManager()
+                spotifyAPIManager.getTracksFromAlbum(albumId: album) { tracks in
+//                     Handle the retrieved tracks here
+//                     This code block will execute when the data is ready
+//                     You can use 'tracks' to update your UI or perform other tasks
+                    DispatchQueue.main.async {
+                        // Clear the page
+                        for subview in self.view.subviews {
+                            subview.removeFromSuperview()
+                        }
+                        // Display the tracks as a list
+                        var y = 0
+                        for track in tracks {
+                            let label = UILabel(frame: CGRect(x: 0, y: y, width: Int(self.view.frame.width), height: 20))
+                            // For each artists retrieve their name
+                            var artists = ""
+                            for artist in track.artists as! [[String: Any]] {
+                                artists += artist["name"] as! String
+                                artists += "|"
+                            }
+                            // Get the album
+                            let album = track.album.name
+                            print(track.album)
+                            label.text = track.title + " - " + artists.split(separator: "|").joined(separator: ",")
+                            label.accessibilityIdentifier = track.title + " - " + artists.split(separator: "|").joined(separator: ",") + " - " + album // Set the accessibilityIdentifier to the track's title
+                            self.view.addSubview(label)
+                            y += 40
+
+                            // Add a tap gesture recognizer to each label
+                            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.launchMusic(tapGestureRecognizer:)))
+                            label.isUserInteractionEnabled = true
+                            label.addGestureRecognizer(tapGestureRecognizer)
+                        }
+                    }
+                }
+            }
+        }
+        // Retrieve the tracks from the API
+    }
+
+    @objc func launchMusic(tapGestureRecognizer: UITapGestureRecognizer) {
+        if let tappedLabel = tapGestureRecognizer.view as? UILabel {
+            if let trackTitle = tappedLabel.accessibilityIdentifier {
+                // You can access the track's title here
+                let youtubeApiManager = YoutubeAPIManager()
+                youtubeApiManager.launchMusic(params: trackTitle)
+            }
+        }
+    }
 }
+
 
 extension UIImageView {
     func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
