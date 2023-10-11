@@ -22,7 +22,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var HomeCollectionView: UICollectionView!
     var images : [Images] = [Images(image: "Haikyuuu", name: "Haikyuuu"), Images(image: "Experiences", name: "Experiences"), Images(image: "Darius", name: "Darius"), Images(image: "Garen", name: "Garen"), Images(image: "android", name: "android"),Images(image: "Haikyuuu", name: "Haikyuuu"), Images(image: "Experiences", name: "Experiences"), Images(image: "Darius", name: "Darius"), Images(image: "Garen", name: "Garen"), Images(image: "android", name: "android")]
 
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
