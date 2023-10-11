@@ -60,17 +60,57 @@
 		5F4EF59C2AD53522007AAD82 /* Deefy Music */ = {
 			isa = PBXGroup;
 			children = (
+				A0E453A32AD58956008ACA2B /* Resources */,
+				A0E453A22AD58933008ACA2B /* AppDelegate */,
+				A0E453A02AD58918008ACA2B /* View */,
+				A0E4539F2AD5890E008ACA2B /* Controller */,
+				A0E4539E2AD58909008ACA2B /* Model */,
+				5F4EF5AB2AD53523007AAD82 /* Info.plist */,
+			);
+			path = "Deefy Music";
+			sourceTree = "<group>";
+		};
+		A0E4539E2AD58909008ACA2B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A0E4539F2AD5890E008ACA2B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				5F90405A2AD545B400800D38 /* RegisterViewController.swift */,
 				5F90405C2AD545F700800D38 /* LoginViewController.swift */,
 				5F4EF59D2AD53522007AAD82 /* AppDelegate.swift */,
 				5F4EF59F2AD53522007AAD82 /* SceneDelegate.swift */,
 				5F4EF5A12AD53522007AAD82 /* ViewController.swift */,
-				5F4EF5A32AD53522007AAD82 /* Main.storyboard */,
-				5F4EF5A62AD53523007AAD82 /* Assets.xcassets */,
-				5F4EF5A82AD53523007AAD82 /* LaunchScreen.storyboard */,
-				5F4EF5AB2AD53523007AAD82 /* Info.plist */,
 			);
-			path = "Deefy Music";
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A0E453A02AD58918008ACA2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5F4EF5A32AD53522007AAD82 /* Main.storyboard */,
+				5F4EF5A82AD53523007AAD82 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A0E453A22AD58933008ACA2B /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		A0E453A32AD58956008ACA2B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5F4EF5A62AD53523007AAD82 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
