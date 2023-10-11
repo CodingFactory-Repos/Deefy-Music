@@ -9,12 +9,17 @@ import UIKit
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var loginTextField: UITextField!
-    
-    
     @IBOutlet weak var loginBtn: UIButton!
     
+    @IBAction func emailTextFieldDone(_ sender: UITextField) {
+        // Hide the keyboard
+        sender.resignFirstResponder()
+    }
+    @IBAction func passwordTextFieldDone(_ sender: UITextField) {
+        // Hide the keyboard
+        sender.resignFirstResponder()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
