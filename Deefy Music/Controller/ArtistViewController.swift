@@ -22,7 +22,7 @@ class ArtistViewController: UIViewController, UICollectionViewDataSource, UIColl
 //        print(artist)
         navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = artist.name
-//        self.artistImage.downloaded(from: artist.image)
+        self.artistImage.downloaded(from: artist.image)
         self.artistName.text = artist.name
 //        self.artistImage.layer.cornerRadius = 10
 //        self.artistImage.clipsToBounds = true
