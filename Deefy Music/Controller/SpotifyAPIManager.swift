@@ -130,7 +130,7 @@ public class SpotifyAPIManager {
                             popularity *= 2
                         }
 
-                        let track = Music(title: tracks["name"] as! String, artists: tracks["artists"] as Any, album: Album(id: album["id"] as! String, name: album["name"] as! String, artists: album["artists"] as Any, image: imageUrl as String, releaseDate: album["release_date"] as! String, totalTracks: album["total_tracks"] as! Int), duration: tracks["duration_ms"] as! Int)
+                        let track = Music(id: tracks["id"] as! String, title: tracks["name"] as! String, artists: tracks["artists"] as Any, album: Album(id: album["id"] as! String, name: album["name"] as! String, artists: album["artists"] as Any, image: imageUrl as String, releaseDate: album["release_date"] as! String, totalTracks: album["total_tracks"] as! Int), duration: tracks["duration_ms"] as! Int)
                         let trackItem = ["item": track, "popularity": popularity as! Int]
                         results.append(trackItem)
                     }
@@ -161,7 +161,7 @@ public class SpotifyAPIManager {
                         let followersArray = artists["followers"] as! [String: Any]
                         let followers = followersArray["total"] as! Int
 
-                        let artist = Artist(name: artists["name"] as! String, image: imageUrl as String, followers: followers as! Int, genres: artists["genres"] as! [String], popularity: artists["popularity"] as! Int)
+                        let artist = Artist(id: artists["id"] as! String, name: artists["name"] as! String, image: imageUrl as String, followers: followers as! Int, genres: artists["genres"] as! [String], popularity: artists["popularity"] as! Int)
                         let artistItem = ["item": artist, "popularity": popularity as! Int]
                         results.append(artistItem)
                     }
@@ -322,7 +322,7 @@ public class SpotifyAPIManager {
                     for item in items2 {
                         self.getAlbumFromId(albumId: albumId) { album in
                             let titleAlbum = album
-                            let track = Music(title: item["name"] as! String, artists: item["artists"] as Any, album: titleAlbum as Album, duration: item["duration_ms"] as! Int)
+                            let track = Music(id: item["id"] as! String, title: item["name"] as! String, artists: item["artists"] as Any, album: titleAlbum as Album, duration: item["duration_ms"] as! Int)
                             tracks.append(track)
 
                             if tracks.count == items2.count {

@@ -14,7 +14,6 @@ class YoutubeAPIManager {
             "album": query[2]
         ] as [String: Any]
 
-
         // get to https://youtube-api.loule.me/?title=\(paramsToSend["title"]!)&artists=\(paramsToSend["artists"]!)&album=\(paramsToSend["album"]!)
         let url = URL(string: "https://youtube-api.loule.me/?title=\(paramsToSend["title"]!)&artist=\(paramsToSend["artists"]!)&album=\(paramsToSend["album"]!)")!
         var request = URLRequest(url: url)
