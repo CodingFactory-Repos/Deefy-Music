@@ -6,6 +6,7 @@ import Foundation
 
 struct Music {
     // Music composed of -> Title, Artists, Album, Image, Duration
+    var id: String
     var title: String
     var artists: Any
     var album: Album
@@ -13,7 +14,8 @@ struct Music {
 
 
     // Init
-    init(title: String, artists: Any, album: Album, duration: Int) {
+    init(id: String, title: String, artists: Any, album: Album, duration: Int) {
+        self.id = id
         self.title = title
         self.artists = artists
         self.album = album
