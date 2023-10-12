@@ -82,7 +82,11 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
         let player = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as! MusicViewController
 
         var MyMusic: Search?
-        MyMusic = Search(image: album.image, artist: self.theArtist, title: self.tracks[indexPath.row].title, item: self.tracks[indexPath.row], type: "music")
+        if playlist != nil {
+            MyMusic = Search(image: playlist.image, artist: self.theArtist, title: self.tracks[indexPath.row].title, item: self.tracks[indexPath.row], type: "music")
+        } else {
+            MyMusic = Search(image: album.image, artist: self.theArtist, title: self.tracks[indexPath.row].title, item: self.tracks[indexPath.row], type: "music")
+        }
         player.selectedItem = MyMusic as? Search
         self.present(player, animated: true, completion: nil)
     }
