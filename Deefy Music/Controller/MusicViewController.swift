@@ -211,6 +211,8 @@ class MusicViewController: UIViewController {
                     icon = "heart.fill"
                 }
                 UserDefaults.standard.set(liked, forKey: "liked")
+            } else {
+                UserDefaults.standard.set([["id": id, "type": type]], forKey: "liked")
             }
         } else if let item = selectedItem?.item as? Podcast {
             let id = item.id
@@ -226,6 +228,8 @@ class MusicViewController: UIViewController {
                     icon = "heart.fill"
                 }
                 UserDefaults.standard.set(liked, forKey: "liked")
+            } else {
+                UserDefaults.standard.set([["id": id, "type": type]], forKey: "liked")
             }
         } else {
             print("Selected item is not a valid item.")
