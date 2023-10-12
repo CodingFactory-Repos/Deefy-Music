@@ -106,41 +106,38 @@
                                     <constraint firstAttribute="width" constant="170" id="ZWY-cO-Sj8"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXZ-9a-qK2">
+                                <rect key="frame" x="175.66666666666666" y="289" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EXO-K8-6pD">
-                                <rect key="frame" x="0.0" y="279" width="393" height="539"/>
+                                <rect key="frame" x="0.0" y="320" width="393" height="498"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="albumCell" id="y80-aP-RUa" customClass="AlbumTableViewCell" customModule="Deefy_Music" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y80-aP-RUa" id="EQ2-B4-yQq">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="31"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOx-sR-oXp">
-                                                    <rect key="frame" x="54" y="0.0" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPV-nk-LC2">
-                                                    <rect key="frame" x="54" y="17" width="42" height="21"/>
+                                                    <rect key="frame" x="30" y="5" width="353" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="RPV-nk-LC2" firstAttribute="leading" secondItem="EQ2-B4-yQq" secondAttribute="leading" constant="54" id="3RB-LF-aKn"/>
-                                                <constraint firstItem="RPV-nk-LC2" firstAttribute="top" secondItem="NOx-sR-oXp" secondAttribute="bottom" constant="-4" id="3Ti-cZ-3Kr"/>
-                                                <constraint firstAttribute="trailing" secondItem="RPV-nk-LC2" secondAttribute="trailing" constant="297" id="E5T-Oi-7NZ"/>
-                                                <constraint firstAttribute="bottom" secondItem="RPV-nk-LC2" secondAttribute="bottom" constant="5.6666679382324219" id="R3z-ut-Hy4"/>
-                                                <constraint firstAttribute="trailing" secondItem="NOx-sR-oXp" secondAttribute="trailing" constant="297" id="cAw-GZ-vxr"/>
-                                                <constraint firstItem="NOx-sR-oXp" firstAttribute="leading" secondItem="EQ2-B4-yQq" secondAttribute="leading" constant="54" id="xlF-UV-HKt"/>
+                                                <constraint firstItem="NOx-sR-oXp" firstAttribute="top" secondItem="EQ2-B4-yQq" secondAttribute="top" constant="5" id="1SJ-RD-6u4"/>
+                                                <constraint firstAttribute="trailing" secondItem="NOx-sR-oXp" secondAttribute="trailing" constant="10" id="cAw-GZ-vxr"/>
+                                                <constraint firstAttribute="bottom" secondItem="NOx-sR-oXp" secondAttribute="bottom" constant="5" id="mFW-ke-yem"/>
+                                                <constraint firstItem="NOx-sR-oXp" firstAttribute="leading" secondItem="EQ2-B4-yQq" secondAttribute="leading" constant="30" id="xlF-UV-HKt"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="artistLabel" destination="RPV-nk-LC2" id="fSs-41-LUs"/>
                                             <outlet property="trackLAbel" destination="NOx-sR-oXp" id="wXY-gD-jSj"/>
                                         </connections>
                                     </tableViewCell>
@@ -151,15 +148,18 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ZKp-5C-LHL" firstAttribute="top" secondItem="pYf-3J-KjR" secondAttribute="top" constant="50" id="1s1-yk-mYb"/>
-                            <constraint firstItem="EXO-K8-6pD" firstAttribute="top" secondItem="ZKp-5C-LHL" secondAttribute="bottom" id="6eL-MT-8At"/>
+                            <constraint firstItem="yXZ-9a-qK2" firstAttribute="centerX" secondItem="pYf-3J-KjR" secondAttribute="centerX" id="Ash-Fc-0iK"/>
                             <constraint firstItem="EXO-K8-6pD" firstAttribute="leading" secondItem="pYf-3J-KjR" secondAttribute="leading" id="BzE-fe-usN"/>
+                            <constraint firstItem="yXZ-9a-qK2" firstAttribute="top" secondItem="ZKp-5C-LHL" secondAttribute="bottom" constant="10" id="RC6-N7-Xm1"/>
                             <constraint firstItem="pYf-3J-KjR" firstAttribute="trailing" secondItem="EXO-K8-6pD" secondAttribute="trailing" id="RKS-hC-T8e"/>
+                            <constraint firstItem="EXO-K8-6pD" firstAttribute="top" secondItem="yXZ-9a-qK2" secondAttribute="bottom" constant="10" id="W19-9Y-ip6"/>
                             <constraint firstItem="pYf-3J-KjR" firstAttribute="bottom" secondItem="EXO-K8-6pD" secondAttribute="bottom" id="exz-sW-9Ir"/>
                             <constraint firstItem="ZKp-5C-LHL" firstAttribute="centerX" secondItem="pYf-3J-KjR" secondAttribute="centerX" id="v0c-4s-3Pc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="albumPicture" destination="ZKp-5C-LHL" id="yt6-4S-jz4"/>
+                        <outlet property="artistLabel" destination="yXZ-9a-qK2" id="NEc-OJ-Xjh"/>
                         <outlet property="trackList" destination="EXO-K8-6pD" id="b3Z-hn-eHF"/>
                     </connections>
                 </viewController>

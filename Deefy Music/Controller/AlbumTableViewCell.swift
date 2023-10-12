@@ -9,7 +9,6 @@ import UIKit
 
 class AlbumTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var trackLAbel: UILabel!
     //    override func awakeFromNib() {
 //        super.awakeFromNib()
