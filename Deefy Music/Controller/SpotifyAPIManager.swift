@@ -13,7 +13,7 @@ public class SpotifyAPIManager {
         // Results will be item + popularity as [item, popularity]
         var results: [[String: Any]] = []
 
-        let url = URL(string: "https://api.spotify.com/v1/search?q=\(query)&type=album,artist,playlist,track&offset=\(offset)&limit=20")!
+        let url = URL(string: "https://api.spotify.com/v1/search?q=\(query)&type=album,artist,playlist,track,episode&offset=\(offset)&limit=20")!
         let token = retrieveToken()
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -47,12 +47,13 @@ public class SpotifyAPIManager {
                     let resultTracks = (json as! [String: Any])["tracks"] as! [String: Any]
                     let resultArtists = (json as! [String: Any])["artists"] as! [String: Any]
                     let resultPlaylists = (json as! [String: Any])["playlists"] as! [String: Any]
+                    let resultPodcasts = (json as! [String: Any])["episodes"] as! [String: Any]
                     // For each item in albums print their name
                     let itemsAlbums = resultAlbums["items"] as! [[String: Any]]
                     let itemsTracks = resultTracks["items"] as! [[String: Any]]
                     let itemsArtists = resultArtists["items"] as! [[String: Any]]
                     let itemsPlaylists = resultPlaylists["items"] as! [[String: Any]]
-
+                    let itemsPodcasts = resultPodcasts["items"] as! [[String: Any]]
 
                     for albums in itemsAlbums {
                         var imageUrl = ""
@@ -129,7 +130,7 @@ public class SpotifyAPIManager {
                             popularity *= 2
                         }
 
-                        let track = Music(title: tracks["name"] as! String, artists: tracks["artists"] as Any, album: Album(id: album["id"] as! String, name: album["name"] as! String, artists: album["artists"] as Any, image: imageUrl as String, releaseDate: album["release_date"] as! String, totalTracks: album["total_tracks"] as! Int), duration: tracks["duration_ms"] as! Int)
+                        let track = Music(id: tracks["id"] as! String, title: tracks["name"] as! String, artists: tracks["artists"] as Any, album: Album(id: album["id"] as! String, name: album["name"] as! String, artists: album["artists"] as Any, image: imageUrl as String, releaseDate: album["release_date"] as! String, totalTracks: album["total_tracks"] as! Int), duration: tracks["duration_ms"] as! Int)
                         let trackItem = ["item": track, "popularity": popularity as! Int]
                         results.append(trackItem)
                     }
@@ -160,7 +161,7 @@ public class SpotifyAPIManager {
                         let followersArray = artists["followers"] as! [String: Any]
                         let followers = followersArray["total"] as! Int
 
-                        let artist = Artist(name: artists["name"] as! String, image: imageUrl as String, followers: followers as! Int, genres: artists["genres"] as! [String], popularity: artists["popularity"] as! Int)
+                        let artist = Artist(id: artists["id"] as! String, name: artists["name"] as! String, image: imageUrl as String, followers: followers as! Int, genres: artists["genres"] as! [String], popularity: artists["popularity"] as! Int)
                         let artistItem = ["item": artist, "popularity": popularity as! Int]
                         results.append(artistItem)
                     }
@@ -175,9 +176,41 @@ public class SpotifyAPIManager {
                             }
                         }
 
+                        var playlistPopularity = -1 as! Int
+                        let query_lowercased = query.lowercased()
+                        if query_lowercased.contains("playlist") || query_lowercased.contains("playlists") {
+                            playlistPopularity = 80
+                        }
+
                         let playlist = Playlist(id: playlists["id"] as! String, name: playlists["name"] as! String, image: imageUrl as String, description: playlists["description"] as! String,owner: playlists["owner"] as! [String: Any], tracks: playlists["tracks"] as! [String: Any])
-                        let playlistItem = ["item": playlist, "popularity": -1]
+                        let playlistItem = ["item": playlist, "popularity": playlistPopularity]
                         results.append(playlistItem)
+                    }
+
+                    for podcasts in itemsPodcasts {
+                        var imageUrl = ""
+                        if let images = podcasts["images"] as? [[String: Any]] {
+                            if let image = images.first {
+                                if let url = image["url"] as? String {
+                                    imageUrl = url
+                                }
+                            }
+                        }
+
+                        var podcastPopularity = 0 as! Int
+                        // If it matches the query then popularity = 1000
+                        let podcast_name = podcasts["name"] as! String
+                        let query_lowercased = query.lowercased()
+                        if (podcast_name.lowercased() == query_lowercased) {
+                            podcastPopularity = 1000
+                        } else if (podcast_name.lowercased().contains(query_lowercased)) {
+                            podcastPopularity = 80
+                        }
+
+                        let podcast = Podcast(id: podcasts["id"] as! String, title: podcasts["name"] as! String, description: podcasts["description"] as! String, image: imageUrl  as String, release_date: podcasts["release_date"] as! String, duration: podcasts["duration_ms"] as! Int)
+                        let podcastItem = ["item": podcast, "popularity": podcastPopularity]
+
+                        results.append(podcastItem)
                     }
 
                     let resultSorted = self.sortResults(results: results)
@@ -295,7 +328,7 @@ public class SpotifyAPIManager {
                     for item in items2 {
                         self.getAlbumFromId(albumId: albumId) { album in
                             let titleAlbum = album
-                            let track = Music(title: item["name"] as! String, artists: item["artists"] as Any, album: titleAlbum as Album, duration: item["duration_ms"] as! Int)
+                            let track = Music(id: item["id"] as! String, title: item["name"] as! String, artists: item["artists"] as Any, album: titleAlbum as Album, duration: item["duration_ms"] as! Int)
                             tracks.append(track)
 
                             if tracks.count == items2.count {
@@ -345,6 +378,96 @@ public class SpotifyAPIManager {
 
                     let album = Album(id: items["id"] as! String, name: items["name"] as! String, artists: items["artists"] as Any, image: imageUrl as! String, releaseDate: items["release_date"] as! String, totalTracks: items["total_tracks"] as! Int)
                     completion(album)
+                } catch {
+                    print("JSON error: \(error.localizedDescription)")
+                }
+            }
+        }
+        task.resume()
+    }
+
+    func getTopTracksFromArtist(artistId: String, completion: @escaping ([Music]) -> Void) {
+        let url = URL(string: "https://api.spotify.com/v1/artists/\(artistId)/top-tracks?market=FR")!
+        let token = retrieveToken()
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            guard let response = response as? HTTPURLResponse,
+                  // If response.statusCode is different than 200...299 then print the status code
+                  (200...299).contains(response.statusCode) else {
+                print("Server error")
+                return
+            }
+
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    let items = (json as! [String: Any])as! [String: Any]
+                    let items2 = items["tracks"] as! [[String: Any]]
+                    var topMusics = [] as [Music]
+                    for item in items2 {
+                        let albumId = (item["album"] as! [String: Any])["id"] as! String
+                        self.getAlbumFromId(albumId: albumId) { album in
+                            let titleAlbum = album
+                            let track = Music(id: item["id"] as! String, title: item["name"] as! String, artists: item["artists"] as Any, album: titleAlbum as Album, duration: item["duration_ms"] as! Int)
+                            topMusics.append(track)
+                        }
+
+                        if topMusics.count == items2.count {
+                            completion(topMusics)
+                        }
+                    }
+                } catch {
+                    print("JSON error: \(error.localizedDescription)")
+                }
+            }
+        }
+        task.resume()
+    }
+
+    func getAlbumsFromArtist(artistId: String, completion: @escaping ([Album]) -> Void) {
+        let url = URL(string: "https://api.spotify.com/v1/artists/\(artistId)/albums")!
+        let token = retrieveToken()
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            guard let response = response as? HTTPURLResponse,
+                  // If response.statusCode is different than 200...299 then print the status code
+                  (200...299).contains(response.statusCode) else {
+                print("Server error")
+                return
+            }
+
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    let items = (json as! [String: Any])as! [String: Any]
+                    let items2 = items["items"] as! [[String: Any]]
+                    var albums = [] as [Album]
+                    for item in items2 {
+                        var imageUrl = ""
+                        if let images = item["images"] as? [[String: Any]] {
+                            if let image = images.first {
+                                if let url = image["url"] as? String {
+                                    imageUrl = url
+                                }
+                            }
+                        }
+
+                        let album = Album(id: item["id"] as! String, name: item["name"] as! String, artists: item["artists"] as Any, image: imageUrl as! String, releaseDate: item["release_date"] as! String, totalTracks: item["total_tracks"] as! Int)
+                        albums.append(album)
+                        completion(albums)
+                    }
                 } catch {
                     print("JSON error: \(error.localizedDescription)")
                 }

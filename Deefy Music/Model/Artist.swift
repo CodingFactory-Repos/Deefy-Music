@@ -6,6 +6,7 @@ import Foundation
 
 struct Artist {
     // Artist should contain -> Name, Image, Followers, Genres, Popularity, Albums, Top Tracks
+    var id: String
     var name: String
     var image: String
     var followers: Int
@@ -13,7 +14,8 @@ struct Artist {
     var popularity: Int
 
     // Init
-    init(name: String, image: String, followers: Int, genres: [String], popularity: Int) {
+    init(id: String, name: String, image: String, followers: Int, genres: [String], popularity: Int) {
+        self.id = id
         self.name = name
         self.image = image
         self.followers = followers
