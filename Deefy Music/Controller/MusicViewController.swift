@@ -35,12 +35,13 @@ class MusicViewController: UIViewController {
                     artistNames.append(name)
                 }
             }
+
             let artistsParam = artistNames.joined(separator: ", ") // Join the artist names with a comma
             // Get the item album
             let album = item.album.name
 
             // Create params for the Youtube API
-            let params = "\(title) - \(artistsParam) - \(album)"
+            let params = "\(title) — \(artistsParam) — \(album)"
 
             let youtubeApiManager = YoutubeAPIManager()
 
