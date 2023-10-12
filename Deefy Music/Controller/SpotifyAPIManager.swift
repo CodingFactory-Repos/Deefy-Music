@@ -501,15 +501,19 @@ public class SpotifyAPIManager {
                     let items2 = items["items"] as! [[String: Any]]
                     var tracks = [] as [Music]
                     for item in items2 {
-//                        print("item: \(item)")
-//                        let albumId = (item["album"] as! [String: Any])["id"] as! String
-//                        self.getAlbumFromId(albumId: albumId) { album in
-//                            let titleAlbum = album
-//                            let track = Music(id: item["id"] as! String, title: item["name"] as! String, artists: item["artists"] as Any, album: titleAlbum as Album, duration: item["duration_ms"] as! Int)
-//                            tracks.append(track)
-//                        }
-//                        completion(tracks)
+                        let track = item["track"] as? [String: Any]
+                        let albumId = ((track as! [String: Any])["album"] as! [String: Any])["id"] as! String
+                        self.getAlbumFromId(albumId: albumId) { album in
+                            let titleAlbum = album
+                            let track = Music(id: track?["id"] as! String, title: track?["name"] as! String, artists: track?["artists"] as Any, album: titleAlbum as Album, duration: track?["duration_ms"] as! Int)
+                            tracks.append(track)
+
+                            if tracks.count == items2.count {
+                                completion(tracks)
+                            }
+                        }
                     }
+
                 } catch {
                     print("JSON error: \(error.localizedDescription)")
                 }

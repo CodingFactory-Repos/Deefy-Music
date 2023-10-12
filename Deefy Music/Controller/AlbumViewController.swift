@@ -23,6 +23,12 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         if playlist != nil {
             self.title = playlist.name
+
+            trackList.dataSource = self
+            trackList.delegate = self
+
+            albumPicture.downloaded(from: playlist.image)
+
             let spotifyAPIManager = SpotifyAPIManager()
             spotifyAPIManager.getTracksFromPlaylist(playlistId: playlist.id) { track in
                 //CHeck if track are in the type Music
@@ -60,31 +66,6 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
 
             }
         }
-
-//        self.title = album.name
-//        let artists = album.artists as? [[String: Any]] ?? []
-//        for artist in artists {
-//            if let name = artist["name"] as? String {
-//                artistLabel.text = name
-//                self.theArtist = name
-//            }
-//        }
-//        trackList.dataSource = self
-//        trackList.delegate = self
-//
-//        albumPicture.downloaded(from: album.image)
-//
-//        let spotifyAPIManager = SpotifyAPIManager()
-//        spotifyAPIManager.getTracksFromAlbum(albumId: album.id) { track in
-//            //CHeck if track are in the type Music
-//            if let track = track as? [Music] {
-//                self.tracks = track
-//                DispatchQueue.main.async {
-//                    self.trackList.reloadData()
-//                }
-//            }
-//
-//        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

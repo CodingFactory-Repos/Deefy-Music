@@ -66,7 +66,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
 
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             if indexPath.row < filteredData.count {
-                print(filteredData[indexPath.row])
+//                print(filteredData[indexPath.row])
 
                 switch filteredData[indexPath.row].type {
                 case "album":
