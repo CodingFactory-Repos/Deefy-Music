@@ -56,9 +56,9 @@ class MusicViewController: UIViewController {
 
             self.view.addSubview(imageView)
 
-//            titleLabel.text = title
-//            titleLabel.numberOfLines = 0 // Allows multiple lines
-//            titleLabel.adjustsFontSizeToFitWidth = true // Reduce font size to fit width
+            titleLabel.text = title
+            titleLabel.numberOfLines = 0 // Allows multiple lines
+            titleLabel.adjustsFontSizeToFitWidth = true // Reduce font size to fit width
 
             youtubeApiManager.launchMusic(params: params) { [weak self] result in
                 guard let self = self, let url = URL(string: result) else {
