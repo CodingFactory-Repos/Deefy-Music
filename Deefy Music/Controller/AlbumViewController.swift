@@ -32,12 +32,15 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         let spotifyAPIManager = SpotifyAPIManager()
         spotifyAPIManager.getTracksFromAlbum(albumId: album.id) { track in
-            self.tracks = track
-            DispatchQueue.main.async {
-                self.trackList.reloadData()
+            //CHeck if track are in the type Music
+            if let track = track as? [Music] {
+                self.tracks = track
+                DispatchQueue.main.async {
+                    self.trackList.reloadData()
+                }
             }
+
         }
-        // Do any additional setup after loading the view.
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
