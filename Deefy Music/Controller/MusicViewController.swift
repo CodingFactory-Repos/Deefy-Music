@@ -73,8 +73,51 @@ class MusicViewController: UIViewController {
                     self.initializeAudioPlayer(with: url)
                 }
             }
+        } else if let item = selectedItem?.item as? Podcast {
+            // Get the item title
+            let title = item.title
+
+            let artist = ""
+
+            let album = "podcast"
+
+            // Create params for the Youtube API
+            let params = "\(title) — \(artist) — \(album)"
+
+            let youtubeApiManager = YoutubeAPIManager()
+
+            let imageView = UIImageView()
+            imageView.downloaded(from: item.image)
+            imageView.contentMode = .scaleAspectFit
+
+            imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300) // Adjust the size as needed
+            imageView.center.x = self.view.center.x
+            imageView.center.y = self.view.center.y - imageView.frame.height / 1.2
+
+            self.view.addSubview(imageView)
+
+            titleLabel.text = title
+            titleLabel.numberOfLines = 0 // Allows multiple lines
+            titleLabel.adjustsFontSizeToFitWidth = true // Reduce font size to fit width
+
+            youtubeApiManager.launchMusic(params: params) { [weak self] result in
+                guard let self = self, let url = URL(string: result) else {
+                    print("URL not found")
+                    return
+                }
+
+                print("URL found")
+
+                DispatchQueue.main.async {
+                    // Initialize the AVPlayer and set up the UI
+                    self.initializeAudioPlayer(with: url)
+                }
+            }
+
+
+
         } else {
-            print("Selected item is not a valid Music item.")
+            print("Selected item is not a valid item.")
         }
     }
 

@@ -13,7 +13,7 @@ public class SpotifyAPIManager {
         // Results will be item + popularity as [item, popularity]
         var results: [[String: Any]] = []
 
-        let url = URL(string: "https://api.spotify.com/v1/search?q=\(query)&type=album,artist,playlist,track&offset=\(offset)&limit=20")!
+        let url = URL(string: "https://api.spotify.com/v1/search?q=\(query)&type=album,artist,playlist,track,episode&offset=\(offset)&limit=20")!
         let token = retrieveToken()
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -47,12 +47,13 @@ public class SpotifyAPIManager {
                     let resultTracks = (json as! [String: Any])["tracks"] as! [String: Any]
                     let resultArtists = (json as! [String: Any])["artists"] as! [String: Any]
                     let resultPlaylists = (json as! [String: Any])["playlists"] as! [String: Any]
+                    let resultPodcasts = (json as! [String: Any])["episodes"] as! [String: Any]
                     // For each item in albums print their name
                     let itemsAlbums = resultAlbums["items"] as! [[String: Any]]
                     let itemsTracks = resultTracks["items"] as! [[String: Any]]
                     let itemsArtists = resultArtists["items"] as! [[String: Any]]
                     let itemsPlaylists = resultPlaylists["items"] as! [[String: Any]]
-
+                    let itemsPodcasts = resultPodcasts["items"] as! [[String: Any]]
 
                     for albums in itemsAlbums {
                         var imageUrl = ""
@@ -178,6 +179,32 @@ public class SpotifyAPIManager {
                         let playlist = Playlist(id: playlists["id"] as! String, name: playlists["name"] as! String, image: imageUrl as String, description: playlists["description"] as! String,owner: playlists["owner"] as! [String: Any], tracks: playlists["tracks"] as! [String: Any])
                         let playlistItem = ["item": playlist, "popularity": -1]
                         results.append(playlistItem)
+                    }
+
+                    for podcasts in itemsPodcasts {
+                        var imageUrl = ""
+                        if let images = podcasts["images"] as? [[String: Any]] {
+                            if let image = images.first {
+                                if let url = image["url"] as? String {
+                                    imageUrl = url
+                                }
+                            }
+                        }
+
+                        var podcastPopularity = 0 as! Int
+                        // If it matches the query then popularity = 1000
+                        let podcast_name = podcasts["name"] as! String
+                        let query_lowercased = query.lowercased()
+                        if (podcast_name.lowercased() == query_lowercased) {
+                            podcastPopularity = 1000
+                        } else if (podcast_name.lowercased().contains(query_lowercased)) {
+                            podcastPopularity = 80
+                        }
+
+                        let podcast = Podcast(id: podcasts["id"] as! String, title: podcasts["name"] as! String, description: podcasts["description"] as! String, image: imageUrl  as String, release_date: podcasts["release_date"] as! String, duration: podcasts["duration_ms"] as! Int)
+                        let podcastItem = ["item": podcast, "popularity": podcastPopularity]
+
+                        results.append(podcastItem)
                     }
 
                     let resultSorted = self.sortResults(results: results)

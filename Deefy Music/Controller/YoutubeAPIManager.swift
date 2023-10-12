@@ -7,7 +7,7 @@ class YoutubeAPIManager {
     func launchMusic(params: String, completion: @escaping (String) -> Void) {
         // Retrieve the best match
 
-        let query = params.split(separator: "-")
+        let query = params.split(separator: "—")
         let paramsToSend = [
             "title": query[0],
             "artists": query[1],
@@ -20,6 +20,8 @@ class YoutubeAPIManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
 
+        print(url)
+        print("AHHH")
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error: \(error)")
