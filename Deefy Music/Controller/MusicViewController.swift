@@ -23,7 +23,7 @@ class MusicViewController: UIViewController {
         super.viewDidLoad()
 
         for subview in self.view.subviews {
-            if subview is UILikeButton {
+            if subview is UILikeButton || subview is UIShareButton {
                 subview.removeFromSuperview()
             }
         }
@@ -112,12 +112,23 @@ class MusicViewController: UIViewController {
                     let likeButton = UILikeButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
                     likeButton.setImage(UIImage(systemName: icon), for: .normal)
                     likeButton.tintColor = UIColor.black
-                    likeButton.center.x = self.view.center.x
-                    likeButton.center.y = self.view.center.y + likeButton.frame.height / 1.2
+                    likeButton.center.x = self.view.center.x - 40
+                    likeButton.center.y = self.musicSlider.frame.maxY + 12
+
                     likeButton.addTarget(self, action: #selector(self.likeFunction), for: .touchUpInside)
 
                     self.view.addSubview(likeButton)
 
+
+                    let shareButton = UIShareButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                    shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+                    shareButton.tintColor = UIColor.black
+                    shareButton.center.x = self.view.center.x + 40
+                    shareButton.center.y = self.musicSlider.frame.maxY + 10
+                    shareButton.id = url.absoluteString
+                    shareButton.addTarget(self, action: #selector(self.shareFunction), for: .touchUpInside)
+
+                    self.view.addSubview(shareButton)
                 }
             }
         } else if let item = selectedItem?.item as? Podcast {
@@ -179,12 +190,21 @@ class MusicViewController: UIViewController {
                     let likeButton = UILikeButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
                     likeButton.setImage(UIImage(systemName: icon), for: .normal)
                     likeButton.tintColor = UIColor.black
-                    likeButton.center.x = self.view.center.x
-                    likeButton.center.y = self.view.center.y + likeButton.frame.height / 1.2
+                    likeButton.center.x = self.view.center.x - 40
+                    likeButton.center.y = self.musicSlider.frame.maxY + 12
                     likeButton.addTarget(self, action: #selector(self.likeFunction), for: .touchUpInside)
 
                     self.view.addSubview(likeButton)
 
+                    let shareButton = UIShareButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                    shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+                    shareButton.tintColor = UIColor.black
+                    shareButton.center.x = self.view.center.x + 40
+                    shareButton.center.y = self.musicSlider.frame.maxY + 10
+                    shareButton.id = url.absoluteString
+                    shareButton.addTarget(self, action: #selector(self.shareFunction), for: .touchUpInside)
+
+                    self.view.addSubview(shareButton)
                 }
             }
         } else {
@@ -245,12 +265,18 @@ class MusicViewController: UIViewController {
         let likeButton = UILikeButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         likeButton.setImage(UIImage(systemName: icon), for: .normal)
         likeButton.tintColor = UIColor.black
-        likeButton.center.x = self.view.center.x
-        likeButton.center.y = self.view.center.y + likeButton.frame.height / 1.2
+        likeButton.center.x = self.view.center.x - 40
+        likeButton.center.y = self.musicSlider.frame.maxY + 12
         likeButton.addTarget(self, action: #selector(likeFunction), for: .touchUpInside)
 
         self.view.addSubview(likeButton)
 
+    }
+
+    @objc func shareFunction() {
+        // Get the id of the button clicked
+        let url = (self.view.subviews.first(where: { $0 is UIShareButton }) as? UIShareButton)?.id ?? ""
+        UIPasteboard.general.string = url
     }
 
     func initializeAudioPlayer(with url: URL) {
@@ -327,6 +353,11 @@ class MusicViewController: UIViewController {
 
 // Extend UIButton to create UILikeButton
 class UILikeButton: UIButton {
+    var id: String?
+    var type: String?
+}
+
+class UIShareButton: UIButton {
     var id: String?
     var type: String?
 }
