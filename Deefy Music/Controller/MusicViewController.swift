@@ -18,10 +18,90 @@ class MusicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let url = URL(string:"https://cdns-preview-d.dzcdn.net/stream/c-deda7fa9316d9e9e880d2c6207e92260-10.mp3")
-        else{
-            print("url not found")
-            return
+        //        hide the slider and labels
+        musicSlider.isHidden = true
+        currentLabel.isHidden = true
+        durationLabel.isHidden = true
+        playButton.isHidden = true
+        //        replace with activity indicator
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = self.view.center
+        activityIndicator.startAnimating()
+        self.view.addSubview(activityIndicator)
+
+        // Check if there is a selected item and if it's a music
+        if let item = selectedItem?.item as? Music {
+            // Get the item title
+            let title = item.title
+            // Get the item artist
+            let artists = item.artists as? [[String: Any]] ?? []
+            // Get the artists' names
+            var artistNames: [String] = []
+            for artist in artists {
+                if let name = artist["name"] as? String {
+                    artistNames.append(name)
+                }
+            }
+            let artistsParam = artistNames.joined(separator: ", ") // Join the artist names with a comma
+            // Get the item album
+            let album = item.album.name
+
+            // Create params for the Youtube API
+            let params = "\(title) - \(artistsParam) - \(album)"
+
+            let youtubeApiManager = YoutubeAPIManager()
+
+
+            // Create an image view
+            let imageView = UIImageView()
+            imageView.downloaded(from: item.album.image)
+            imageView.contentMode = .scaleAspectFit
+
+            imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300) // Adjust the size as needed
+            imageView.center.x = self.view.center.x
+            imageView.center.y = self.view.center.y - imageView.frame.height / 1.2
+
+            self.view.addSubview(imageView)
+
+            titleLabel.text = title
+            titleLabel.numberOfLines = 0 // Allows multiple lines
+            titleLabel.adjustsFontSizeToFitWidth = true // Reduce font size to fit width
+
+            youtubeApiManager.launchMusic(params: params) { [weak self] result in
+                guard let self = self, let url = URL(string: result) else {
+                    print("URL not found")
+                    return
+                }
+
+                print("URL found")
+
+                DispatchQueue.main.async {
+                    // Initialize the AVPlayer and set up the UI
+                    self.initializeAudioPlayer(with: url)
+                    print("loaded")
+//                    show the slider and labels
+                    self.musicSlider.isHidden = false
+                    self.currentLabel.isHidden = false
+                    self.durationLabel.isHidden = false
+                    self.playButton.isHidden = false
+                    activityIndicator.stopAnimating()
+                    activityIndicator.removeFromSuperview()
+                }
+            }
+        } else {
+            print("Selected item is not a valid Music item.")
+        }
+    }
+
+    func initializeAudioPlayer(with url: URL) {
+        // Initialize the AVPlayer
+        do {
+            audioPlayer = AVPlayer(url: url)
+            musicSlider.maximumValue = Float(audioPlayer.currentItem?.asset.duration.seconds ?? 0)
+            updateDurationLabel()
+            setupAudioSession()
+        } catch {
+            print("AVPlayer initialization error: \(error)")
         }
         print("url found")
 
