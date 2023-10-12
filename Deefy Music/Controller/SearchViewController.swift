@@ -152,7 +152,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
 
             self.filteredData.append(Search(image: album.image, artist: "Album · \(author) ", title: album.name, item: album, type: "album"))
         } else if let playlist = item as? Playlist {
-            self.filteredData.append(Search(image: playlist.image, artist: "Playlist · \(playlist.owner["display_name"] as! String)", title: playlist.name, item: playlist, type: "playlist"))
+//            self.filteredData.append(Search(image: playlist.image, artist: "Playlist · \(playlist.owner["display_name"] as! String)", title: playlist.name, item: playlist))
+        } else if let podcast = item as? Podcast {
+            self.filteredData.append(Search(image: podcast.image, artist: "Podcast", title: podcast.title, item: podcast, type: "podcast"))
+        } else {
+            print("Item is not a valid type.")
         }
     }
 

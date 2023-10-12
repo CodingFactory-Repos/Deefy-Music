@@ -22,6 +22,12 @@ class MusicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        for subview in self.view.subviews {
+            if subview is UILikeButton {
+                subview.removeFromSuperview()
+            }
+        }
+
         //        hide the slider and labels
         musicSlider.isHidden = true
         currentLabel.isHidden = true
@@ -46,12 +52,13 @@ class MusicViewController: UIViewController {
                     artistNames.append(name)
                 }
             }
+
             let artistsParam = artistNames.joined(separator: ", ") // Join the artist names with a comma
             // Get the item album
             let album = item.album.name
 
             // Create params for the Youtube API
-            let params = "\(title) - \(artistsParam) - \(album)"
+            let params = "\(title) — \(artistsParam) — \(album)"
 
             let youtubeApiManager = YoutubeAPIManager()
 
@@ -90,11 +97,156 @@ class MusicViewController: UIViewController {
                     self.playButton.isHidden = false
                     activityIndicator.stopAnimating()
                     activityIndicator.removeFromSuperview()
+
+                    var icon = "heart"
+                    if let liked = UserDefaults.standard.array(forKey: "liked") as? [[String: String]] {
+                        if liked.contains(where: { ($0["id"] ?? "") == item.id }) {
+                            icon = "heart.fill"
+                        } else {
+                            icon = "heart"
+                        }
+                    } else {
+                        icon = "heart"
+                    }
+
+                    let likeButton = UILikeButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                    likeButton.setImage(UIImage(systemName: icon), for: .normal)
+                    likeButton.tintColor = UIColor.black
+                    likeButton.center.x = self.view.center.x
+                    likeButton.center.y = self.view.center.y + likeButton.frame.height / 1.2
+                    likeButton.addTarget(self, action: #selector(self.likeFunction), for: .touchUpInside)
+
+                    self.view.addSubview(likeButton)
+
+                }
+            }
+        } else if let item = selectedItem?.item as? Podcast {
+            // Get the item title
+            let title = item.title
+
+            let artist = ""
+
+            let album = "podcast"
+
+            // Create params for the Youtube API
+            let params = "\(title) — \(artist) — \(album)"
+
+            let youtubeApiManager = YoutubeAPIManager()
+
+            let imageView = UIImageView()
+            imageView.downloaded(from: item.image)
+            imageView.contentMode = .scaleAspectFit
+
+            imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300) // Adjust the size as needed
+            imageView.center.x = self.view.center.x
+            imageView.center.y = self.view.center.y - imageView.frame.height / 1.2
+
+            self.view.addSubview(imageView)
+
+            titleLabel.text = title
+            titleLabel.numberOfLines = 0 // Allows multiple lines
+            titleLabel.adjustsFontSizeToFitWidth = true // Reduce font size to fit width
+
+            youtubeApiManager.launchMusic(params: params) { [weak self] result in
+                guard let self = self, let url = URL(string: result) else {
+                    print("URL not found")
+                    return
+                }
+
+                print("URL found")
+                DispatchQueue.main.async {
+                    self.initializeAudioPlayer(with: url)
+
+                    //                    show the slider and labels
+                    self.musicSlider.isHidden = false
+                    self.currentLabel.isHidden = false
+                    self.durationLabel.isHidden = false
+                    self.playButton.isHidden = false
+                    activityIndicator.stopAnimating()
+                    activityIndicator.removeFromSuperview()
+
+                    var icon = "heart"
+                    if let liked = UserDefaults.standard.array(forKey: "liked") as? [[String: String]] {
+                        if liked.contains(where: { ($0["id"] ?? "") == item.id }) {
+                            icon = "heart.fill"
+                        } else {
+                            icon = "heart"
+                        }
+                    } else {
+                        icon = "heart"
+                    }
+
+                    let likeButton = UILikeButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                    likeButton.setImage(UIImage(systemName: icon), for: .normal)
+                    likeButton.tintColor = UIColor.black
+                    likeButton.center.x = self.view.center.x
+                    likeButton.center.y = self.view.center.y + likeButton.frame.height / 1.2
+                    likeButton.addTarget(self, action: #selector(self.likeFunction), for: .touchUpInside)
+
+                    self.view.addSubview(likeButton)
+
                 }
             }
         } else {
-            print("Selected item is not a valid Music item.")
+            print("Selected item is not a valid item.")
         }
+    }
+
+    @objc func likeFunction() {
+        // Get the item id
+        var icon = "heart.fill"
+
+        if let item = selectedItem?.item as? Music {
+            let id = item.id
+            let type = selectedItem?.type ?? "music"
+            // Get the liked items
+            if var liked = UserDefaults.standard.array(forKey: "liked") as? [[String: String]] {
+                if liked.contains(where: { ($0["id"] ?? "") == id }) {
+                    // Remove the item from the liked items
+                    liked.removeAll(where: { ($0["id"] ?? "") == id })
+                    icon = "heart"
+                } else {
+                    // Add the item to the liked items
+                    liked.append(["id": id, "type": type])
+                    icon = "heart.fill"
+                }
+                UserDefaults.standard.set(liked, forKey: "liked")
+            }
+        } else if let item = selectedItem?.item as? Podcast {
+            let id = item.id
+            let type = selectedItem?.type ?? "podcast"
+            // Get the liked items
+            if var liked = UserDefaults.standard.array(forKey: "liked") as? [[String: String]] {
+                if liked.contains(where: { ($0["id"] ?? "") == id }) {
+                    // Remove the item from the liked items
+                    liked.removeAll(where: { ($0["id"] ?? "") == id })
+                } else {
+                    // Add the item to the liked items
+                    liked.append(["id": id, "type": type])
+                    icon = "heart.fill"
+                }
+                UserDefaults.standard.set(liked, forKey: "liked")
+            }
+        } else {
+            print("Selected item is not a valid item.")
+        }
+
+        // Get rid of the old button
+        for subview in self.view.subviews {
+            if subview is UILikeButton {
+                subview.removeFromSuperview()
+            }
+        }
+
+        let likeButton = UILikeButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        likeButton.setImage(UIImage(systemName: icon), for: .normal)
+        likeButton.tintColor = UIColor.black
+        likeButton.center.x = self.view.center.x
+        likeButton.center.y = self.view.center.y + likeButton.frame.height / 1.2
+        likeButton.addTarget(self, action: #selector(likeFunction), for: .touchUpInside)
+
+        self.view.addSubview(likeButton)
+
     }
 
     func initializeAudioPlayer(with url: URL) {
@@ -166,4 +318,11 @@ class MusicViewController: UIViewController {
             }
         }
     }
+}
+
+
+// Extend UIButton to create UILikeButton
+class UILikeButton: UIButton {
+    var id: String?
+    var type: String?
 }

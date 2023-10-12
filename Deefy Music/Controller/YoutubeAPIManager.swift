@@ -7,18 +7,19 @@ class YoutubeAPIManager {
     func launchMusic(params: String, completion: @escaping (String) -> Void) {
         // Retrieve the best match
 
-        let query = params.split(separator: "-")
+        let query = params.split(separator: "—")
         let paramsToSend = [
             "title": query[0],
             "artists": query[1],
             "album": query[2]
         ] as [String: Any]
 
-
         // get to https://youtube-api.loule.me/?title=\(paramsToSend["title"]!)&artists=\(paramsToSend["artists"]!)&album=\(paramsToSend["album"]!)
         let url = URL(string: "https://youtube-api.loule.me/?title=\(paramsToSend["title"]!)&artist=\(paramsToSend["artists"]!)&album=\(paramsToSend["album"]!)")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+
+        print(url)
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
