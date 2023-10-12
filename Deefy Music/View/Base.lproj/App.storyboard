@@ -328,6 +328,7 @@
                         <outlet property="durationLabel" destination="xIv-6F-Lqq" id="Wec-Sv-PU1"/>
                         <outlet property="musicSlider" destination="fbb-UY-lT9" id="Und-G3-edO"/>
                         <outlet property="playButton" destination="oOX-mC-44S" id="YEr-wX-CU0"/>
+                        <outlet property="titleLabel" destination="Xtk-pP-e56" id="vWF-O3-TNz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5JF-EH-Vg7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
