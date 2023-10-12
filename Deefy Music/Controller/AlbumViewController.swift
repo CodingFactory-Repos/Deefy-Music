@@ -10,6 +10,7 @@ import UIKit
 class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var album : Album!
     var tracks : [Music] = []
+    var theArtist : String = ""
 
     @IBOutlet weak var artistLabel: UILabel!
 
@@ -23,6 +24,7 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
         for artist in artists {
             if let name = artist["name"] as? String {
                 artistLabel.text = name
+                self.theArtist = name
             }
         }
         trackList.dataSource = self
@@ -53,11 +55,15 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
 
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let player = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "player") as! MusicViewController
-//        player.track = self.tracks[indexPath.row]
-//        self.navigationController?.pushViewController(player, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let player = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as! MusicViewController
+
+        var MyMusic: Search?
+        MyMusic = Search(image: album.image, artist: self.theArtist, title: self.tracks[indexPath.row].title, item: self.tracks[indexPath.row])
+        player.selectedItem = MyMusic as? Search
+        self.present(player, animated: true, completion: nil)
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
