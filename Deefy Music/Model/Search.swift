@@ -8,12 +8,10 @@ struct Search {
     var image: String
     var artist: String
     var title: String
-    var item: Any
 
-    init(image: String, artist: String, title: String, item: Any) {
+    init(image: String, artist: String, title: String) {
         self.image = image
         self.artist = artist
         self.title = title
-        self.item = item
     }
 }

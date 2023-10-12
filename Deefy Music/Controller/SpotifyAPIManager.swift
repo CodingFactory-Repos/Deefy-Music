@@ -20,6 +20,7 @@ public class SpotifyAPIManager {
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            print(request)
             if let error = error {
                 print("Error: \(error)")
                 return
@@ -149,11 +150,9 @@ public class SpotifyAPIManager {
                         let query_lowercased = query.lowercased()
                         if (artist_name.lowercased() != query_lowercased) {
                             popularity /= 2
-                        } else if (artist_name.lowercased() == query_lowercased) {
-                            popularity *= 1000
                         } else if (artist_name.lowercased().contains(query_lowercased)) {
                             popularity *= 3/2
-                        } else  {
+                        } else {
                             popularity *= 2
                         }
 
@@ -236,6 +235,7 @@ public class SpotifyAPIManager {
             guard let response = response as? HTTPURLResponse,
                   // If response.statusCode is different than 200...299 then print the status code
                   (200...299).contains(response.statusCode) else {
+                print(response)
                 print("Server error")
                 return
             }
@@ -269,6 +269,7 @@ public class SpotifyAPIManager {
 
     func getTracksFromAlbum(albumId: String, completion: @escaping ([Music]) -> Void) {
         var tracks = [] as [Music]
+        print(albumId)
         let url = URL(string: "https://api.spotify.com/v1/albums/\(albumId)/tracks")!
         let token = retrieveToken()
         var request = URLRequest(url: url)
