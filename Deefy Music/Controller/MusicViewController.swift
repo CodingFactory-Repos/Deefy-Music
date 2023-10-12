@@ -46,6 +46,7 @@ class MusicViewController: UIViewController {
         } catch {
             print(error)
         }
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -69,9 +70,8 @@ class MusicViewController: UIViewController {
         }
     }
 
-    @IBAction func ChangeAudioTime(_ sender: Any) {
-        audioPlayer.seek(to: CMTime(seconds: Double(musicSlider.value), preferredTimescale: 1))
-    }
+    
+    // MARK: - Navigation
 
     @objc func updateSlider(){
         musicSlider.value = Float(audioPlayer.currentTime().seconds)

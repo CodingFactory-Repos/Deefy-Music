@@ -31,6 +31,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         spotifyAPIManager.retrieveSpotifyNewAlbums { albums in
             self.album = albums
+            DispatchQueue.main.async {
+                self.HomeCollectionView.reloadData()
+            }
         }
         
         // Do any additional setup after loading the view.
@@ -46,14 +49,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)as! HomeCollectionViewCell
-        print(album[indexPath.row].name)
             cell.ImagesCell.downloaded(from: album[indexPath.row].image)
-            cell.ImagesCell.contentMode = .scaleAspectFit
             cell.labelImage.text = album[indexPath.row].name
         return cell
     }
-    
-    
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let albumViewController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "album") as! AlbumViewController
+        albumViewController.album = album[indexPath.row]
+        self.navigationController?.pushViewController(albumViewController, animated: true)
+    }
+
+
     /*
      // MARK: - Navigation
      
