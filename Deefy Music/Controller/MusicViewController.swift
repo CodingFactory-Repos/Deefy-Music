@@ -56,9 +56,9 @@ class MusicViewController: UIViewController {
 
             self.view.addSubview(imageView)
 
-            titleLabel.text = title
-            titleLabel.numberOfLines = 0 // Allows multiple lines
-            titleLabel.adjustsFontSizeToFitWidth = true // Reduce font size to fit width
+//            titleLabel.text = title
+//            titleLabel.numberOfLines = 0 // Allows multiple lines
+//            titleLabel.adjustsFontSizeToFitWidth = true // Reduce font size to fit width
 
             youtubeApiManager.launchMusic(params: params) { [weak self] result in
                 guard let self = self, let url = URL(string: result) else {
@@ -112,6 +112,14 @@ class MusicViewController: UIViewController {
     }
 
     @IBAction func Play(_ sender: Any) {
+        let tolerance = 0.1 // Tolérance en secondes
+        if let currentTime = audioPlayer.currentItem?.currentTime().seconds,
+           let duration = audioPlayer.currentItem?.asset.duration.seconds {
+            if abs(currentTime - duration) <= tolerance {
+                // La lecture est considérée comme terminée
+                audioPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
+            }
+        }
         if audioPlayer.rate == 0 {
             // Play the audio
             audioPlayer.play()
