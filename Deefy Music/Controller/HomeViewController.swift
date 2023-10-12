@@ -18,17 +18,23 @@ extension UIImage {
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
-
     @IBOutlet weak var HomeCollectionView: UICollectionView!
-    var images : [Images] = [Images(image: "Haikyuuu", name: "Haikyuuu"), Images(image: "Experiences", name: "Experiences"), Images(image: "Darius", name: "Darius"), Images(image: "Garen", name: "Garen"), Images(image: "android", name: "android"),Images(image: "Haikyuuu", name: "Haikyuuu"), Images(image: "Experiences", name: "Experiences"), Images(image: "Darius", name: "Darius"), Images(image: "Garen", name: "Garen"), Images(image: "android", name: "android")]
-
+    var album : [Album] = []
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        let spotifyAPIManager = SpotifyAPIManager()
+
+        spotifyAPIManager.retrieveSpotifyNewAlbums { albums in
+            self.album = albums
+            DispatchQueue.main.async {
+                self.HomeCollectionView.reloadData()
+            }
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -38,34 +44,31 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return album.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)as! HomeCollectionViewCell
-//        cell.ImagesCell.image = UIImage(named: images[indexPath.row].image)
-        if let image = UIImage(named: images[indexPath.row].image) {
-
-            let targetSize = CGSize(width: 175, height: 150)
-
-            let resizedImage = image.resize(to: targetSize)
-
-            cell.ImagesCell.image = resizedImage
-            cell.ImagesCell.contentMode = .scaleAspectFit
-            cell.labelImage.text = images[indexPath.row].name
-        }
+        cell.ImagesCell.downloaded(from: album[indexPath.row].image)
+        cell.labelImage.text = album[indexPath.row].name
         return cell
     }
-    
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let albumViewController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "album") as! AlbumViewController
+        albumViewController.album = album[indexPath.row]
+        self.navigationController?.pushViewController(albumViewController, animated: true)
+    }
+
 
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
 
 }
