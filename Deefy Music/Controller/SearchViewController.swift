@@ -73,6 +73,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                     let albumViewController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "album") as! AlbumViewController
                     albumViewController.album = filteredData[indexPath.row].item as! Album
                     self.navigationController?.pushViewController(albumViewController, animated: true)
+                case "artist":
+                    let artistViewController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "artistView") as! ArtistViewController
+                    artistViewController.artist = filteredData[indexPath.row].item as! Artist
+                    self.navigationController?.pushViewController(artistViewController, animated: true)
                 default:
                     if let musicVC = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as? MusicViewController {
                         musicVC.selectedItem = filteredData[indexPath.row] as? Search

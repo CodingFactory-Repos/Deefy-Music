@@ -465,7 +465,9 @@ public class SpotifyAPIManager {
                         }
 
                         let album = Album(id: item["id"] as! String, name: item["name"] as! String, artists: item["artists"] as Any, image: imageUrl as! String, releaseDate: item["release_date"] as! String, totalTracks: item["total_tracks"] as! Int)
-                        albums.append(album)
+                        if (album.totalTracks > 2) {
+                            albums.append(album)
+                        }
                         completion(albums)
                     }
                 } catch {

@@ -8,7 +8,7 @@
 import UIKit
 
 class ArtistAlbumCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var albumCover: UIView!
+    @IBOutlet weak var albumCover: UIImageView!
     
     @IBOutlet weak var albumTitle: UILabel!
 }
