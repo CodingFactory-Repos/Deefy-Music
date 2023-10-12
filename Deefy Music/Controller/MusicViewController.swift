@@ -109,7 +109,7 @@ class MusicViewController: UIViewController {
                         icon = "heart"
                     }
 
-                    let likeButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                    let likeButton = UILikeButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
                     likeButton.setImage(UIImage(systemName: icon), for: .normal)
                     likeButton.tintColor = UIColor.black
                     likeButton.center.x = self.view.center.x
@@ -155,8 +155,6 @@ class MusicViewController: UIViewController {
 
                 print("URL found")
                 DispatchQueue.main.async {
-                    // Initialize the AVPlayer and set up the UI
-                    print(url)
                     self.initializeAudioPlayer(with: url)
 
                     //                    show the slider and labels
@@ -178,7 +176,7 @@ class MusicViewController: UIViewController {
                         icon = "heart"
                     }
 
-                    let likeButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                    let likeButton = UILikeButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
                     likeButton.setImage(UIImage(systemName: icon), for: .normal)
                     likeButton.tintColor = UIColor.black
                     likeButton.center.x = self.view.center.x
@@ -203,14 +201,11 @@ class MusicViewController: UIViewController {
             let type = selectedItem?.type ?? "music"
             // Get the liked items
             if var liked = UserDefaults.standard.array(forKey: "liked") as? [[String: String]] {
-                print(liked)
                 if liked.contains(where: { ($0["id"] ?? "") == id }) {
-                    print("Here")
                     // Remove the item from the liked items
                     liked.removeAll(where: { ($0["id"] ?? "") == id })
                     icon = "heart"
                 } else {
-                    print("Not here")
                     // Add the item to the liked items
                     liked.append(["id": id, "type": type])
                     icon = "heart.fill"
@@ -222,14 +217,10 @@ class MusicViewController: UIViewController {
             let type = selectedItem?.type ?? "podcast"
             // Get the liked items
             if var liked = UserDefaults.standard.array(forKey: "liked") as? [[String: String]] {
-                print(liked)
                 if liked.contains(where: { ($0["id"] ?? "") == id }) {
-                    print("Here")
                     // Remove the item from the liked items
                     liked.removeAll(where: { ($0["id"] ?? "") == id })
-                    icon = "heart"
                 } else {
-                    print("Not here")
                     // Add the item to the liked items
                     liked.append(["id": id, "type": type])
                     icon = "heart.fill"
