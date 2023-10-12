@@ -70,9 +70,18 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
 
                 switch filteredData[indexPath.row].type {
                 case "album":
+                    print(filteredData[indexPath.row].item)
                     let albumViewController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "album") as! AlbumViewController
                     albumViewController.album = filteredData[indexPath.row].item as! Album
                     self.navigationController?.pushViewController(albumViewController, animated: true)
+
+                case "playlist":
+                    print("playlist")
+//                    print( filteredData[indexPath.row].item as! Album)
+                    let playlistViewController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "album") as! AlbumViewController
+                    playlistViewController.playlist = filteredData[indexPath.row].item as! Playlist
+                    self.navigationController?.pushViewController(playlistViewController, animated: true)
+
                 default:
                     if let musicVC = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as? MusicViewController {
                         musicVC.selectedItem = filteredData[indexPath.row] as? Search
@@ -148,9 +157,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             // Append the album to the filteredData
             let authorAndFeats = album.artists as! [[String: Any]]
             let author = authorAndFeats[0]["name"] as! String
+
             self.filteredData.append(Search(image: album.image, artist: "Album · \(author) ", title: album.name, item: album, type: "album"))
         } else if let playlist = item as? Playlist {
-            self.filteredData.append(Search(image: playlist.image, artist: "Playlist · \(playlist.owner["display_name"] as! String)", title: playlist.name, item: playlist , type: "playlist"))
+            self.filteredData.append(Search(image: playlist.image, artist: "Playlist · \(playlist.owner["display_name"] as! String)", title: playlist.name, item: playlist, type: "playlist"))
         } else if let podcast = item as? Podcast {
             self.filteredData.append(Search(image: podcast.image, artist: "Podcast", title: podcast.title, item: podcast, type: "podcast"))
         } else {
