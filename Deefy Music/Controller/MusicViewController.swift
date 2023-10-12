@@ -22,6 +22,17 @@ class MusicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //        hide the slider and labels
+        musicSlider.isHidden = true
+        currentLabel.isHidden = true
+        durationLabel.isHidden = true
+        playButton.isHidden = true
+        //        replace with activity indicator
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = self.view.center
+        activityIndicator.startAnimating()
+        self.view.addSubview(activityIndicator)
+
         // Check if there is a selected item and if it's a music
         if let item = selectedItem?.item as? Music {
             // Get the item title
@@ -72,6 +83,14 @@ class MusicViewController: UIViewController {
                 DispatchQueue.main.async {
                     // Initialize the AVPlayer and set up the UI
                     self.initializeAudioPlayer(with: url)
+                    print("loaded")
+//                    show the slider and labels
+                    self.musicSlider.isHidden = false
+                    self.currentLabel.isHidden = false
+                    self.durationLabel.isHidden = false
+                    self.playButton.isHidden = false
+                    activityIndicator.stopAnimating()
+                    activityIndicator.removeFromSuperview()
                 }
             }
         } else if let item = selectedItem?.item as? Podcast {
