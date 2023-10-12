@@ -65,18 +65,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            if indexPath.row < filteredData.count {
-                let selectedItem = filteredData[indexPath.row]
-                if let musicVC = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as? MusicViewController {
-
-                    musicVC.selectedItem = selectedItem as? Search
-                    self.present(musicVC, animated: true, completion: nil)
-                }
-            } else {
-                // Handle the case when indexPath.row is out of bounds
-                print("Invalid indexPath: \(indexPath.row)")
-                // You can show an alert or perform other error-handling logic here
-            }
+        if let vc = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as? MusicViewController {
+            self.present(vc, animated:true, completion: nil)
+        }
       }
 
     var searchTask: DispatchWorkItem?
@@ -133,18 +124,18 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             let authorAndFeats = music.artists as! [[String: Any]]
             let author = authorAndFeats[0]["name"] as! String
 
-            self.filteredData.append(Search(image: music.album.image, artist: "Music · \(author)", title: music.title, item: music))
+            self.filteredData.append(Search(image: music.album.image, artist: "Music · \(author)", title: music.title))
         } else if let artist = item as? Artist {
             // Append the artist to the filteredData
-            self.filteredData.append(Search(image: artist.image, artist: "Seek profile",  title: artist.name, item: artist))
+            self.filteredData.append(Search(image: artist.image, artist: "Seek profile",  title: artist.name))
         } else if let album = item as? Album {
             // Append the album to the filteredData
             let authorAndFeats = album.artists as! [[String: Any]]
             let author = authorAndFeats[0]["name"] as! String
 
-            self.filteredData.append(Search(image: album.image, artist: "Album · \(author) ", title: album.name, item: album))
+            self.filteredData.append(Search(image: album.image, artist: "Album · \(author) ", title: album.name))
         } else if let playlist = item as? Playlist {
-            self.filteredData.append(Search(image: playlist.image, artist: "Playlist · \(playlist.owner["display_name"] as! String)", title: playlist.name, item: playlist))
+            self.filteredData.append(Search(image: playlist.image, artist: "Playlist · \(playlist.owner["display_name"] as! String)", title: playlist.name))
         }
     }
 
