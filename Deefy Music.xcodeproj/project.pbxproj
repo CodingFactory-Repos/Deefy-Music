@@ -60,11 +60,11 @@
 		9B22035F5B323E0B3D1F325C /* secrets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = secrets.json; sourceTree = "<group>"; };
 		9B220D0CD105AF2A4AE4CD7B /* MyImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyImages.swift; sourceTree = "<group>"; };
 		9B220F30F17AAB7051BF0F1D /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
-		A0554A062AD6DCEA00A8B024 /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LikedViewController.swift; path = "Deefy Music/View/LikedViewController.swift"; sourceTree = SOURCE_ROOT; };
+		A0554A062AD6DCEA00A8B024 /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LikedViewController.swift; path = "Deefy Music/Controller/LikedViewController.swift"; sourceTree = SOURCE_ROOT; };
 		A0554A082AD6DD3000A8B024 /* LikedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedTableViewCell.swift; sourceTree = "<group>"; };
 		FF94226E2AD82A1800F35EC2 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		FF9422702AD82A3100F35EC2 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
-		FF9422742AD82D0800F35EC2 /* App.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = App.storyboard; sourceTree = "<group>"; };
+		FF9422742AD82D0800F35EC2 /* App.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = App.storyboard; path = Base.lproj/App.storyboard; sourceTree = "<group>"; };
 		FFA440F12AD691FC006AAA3F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FFA440F32AD693E2006AAA3F /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		FFA440F72AD6B2DC006AAA3F /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
