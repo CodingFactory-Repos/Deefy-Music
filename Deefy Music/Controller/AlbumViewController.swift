@@ -11,6 +11,7 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
     var album : Album!
     var tracks : [Music] = []
     var theArtist : String = ""
+    var playlist: Playlist!
 
     @IBOutlet weak var artistLabel: UILabel!
 
@@ -19,29 +20,51 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: true)
-        self.title = album.name
-        let artists = album.artists as? [[String: Any]] ?? []
-        for artist in artists {
-            if let name = artist["name"] as? String {
-                artistLabel.text = name
-                self.theArtist = name
+
+        if playlist != nil {
+            self.title = playlist.name
+
+            trackList.dataSource = self
+            trackList.delegate = self
+
+            albumPicture.downloaded(from: playlist.image)
+
+            let spotifyAPIManager = SpotifyAPIManager()
+            spotifyAPIManager.getTracksFromPlaylist(playlistId: playlist.id) { track in
+                //CHeck if track are in the type Music
+                if let track = track as? [Music] {
+                    self.tracks = track
+                    DispatchQueue.main.async {
+                        self.trackList.reloadData()
+                    }
+                }
+
             }
-        }
-        trackList.dataSource = self
-        trackList.delegate = self
-
-        albumPicture.downloaded(from: album.image)
-
-        let spotifyAPIManager = SpotifyAPIManager()
-        spotifyAPIManager.getTracksFromAlbum(albumId: album.id) { track in
-            //CHeck if track are in the type Music
-            if let track = track as? [Music] {
-                self.tracks = track
-                DispatchQueue.main.async {
-                    self.trackList.reloadData()
+        } else {
+            self.title = album.name
+            let artists = album.artists as? [[String: Any]] ?? []
+            for artist in artists {
+                if let name = artist["name"] as? String {
+                    artistLabel.text = name
+                    self.theArtist = name
                 }
             }
+            trackList.dataSource = self
+            trackList.delegate = self
 
+            albumPicture.downloaded(from: album.image)
+
+            let spotifyAPIManager = SpotifyAPIManager()
+            spotifyAPIManager.getTracksFromAlbum(albumId: album.id) { track in
+                //CHeck if track are in the type Music
+                if let track = track as? [Music] {
+                    self.tracks = track
+                    DispatchQueue.main.async {
+                        self.trackList.reloadData()
+                    }
+                }
+
+            }
         }
     }
 
@@ -59,7 +82,11 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
         let player = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as! MusicViewController
 
         var MyMusic: Search?
-        MyMusic = Search(image: album.image, artist: self.theArtist, title: self.tracks[indexPath.row].title, item: self.tracks[indexPath.row], type: "music")
+        if playlist != nil {
+            MyMusic = Search(image: playlist.image, artist: self.theArtist, title: self.tracks[indexPath.row].title, item: self.tracks[indexPath.row], type: "music")
+        } else {
+            MyMusic = Search(image: album.image, artist: self.theArtist, title: self.tracks[indexPath.row].title, item: self.tracks[indexPath.row], type: "music")
+        }
         player.selectedItem = MyMusic as? Search
         self.present(player, animated: true, completion: nil)
     }

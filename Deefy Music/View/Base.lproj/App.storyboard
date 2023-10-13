@@ -18,31 +18,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ISM-f8-M0K">
-                                <rect key="frame" x="0.0" y="59" width="430" height="790"/>
+                                <rect key="frame" x="0.0" y="79" width="430" height="770"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OwW-jF-Jp7">
-                                    <size key="itemSize" width="180" height="200"/>
+                                    <size key="itemSize" width="252" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="TS7-lC-2Xc" customClass="HomeCollectionViewCell" customModule="Deefy_Music" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
+                                        <rect key="frame" x="89" y="0.0" width="252" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="J0z-Sa-zFr">
-                                            <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="252" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pVX-oG-wMF">
-                                                    <rect key="frame" x="5" y="0.0" width="170" height="170"/>
+                                                    <rect key="frame" x="30" y="0.0" width="192" height="140"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="170" id="dDu-TJ-vUf"/>
-                                                        <constraint firstAttribute="width" constant="170" id="zK4-7a-UUn"/>
+                                                        <constraint firstAttribute="height" constant="140" id="dDu-TJ-vUf"/>
+                                                        <constraint firstAttribute="width" constant="140" id="zK4-7a-UUn"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X20-b9-bQT">
-                                                    <rect key="frame" x="10" y="170" width="160" height="30"/>
+                                                    <rect key="frame" x="40" y="150" width="172" height="40"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -50,15 +50,15 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="pVX-oG-wMF" firstAttribute="top" secondItem="J0z-Sa-zFr" secondAttribute="top" id="81L-zG-5nq"/>
-                                                <constraint firstAttribute="trailing" secondItem="pVX-oG-wMF" secondAttribute="trailing" constant="5" id="9hA-92-frS"/>
-                                                <constraint firstAttribute="bottom" secondItem="X20-b9-bQT" secondAttribute="bottom" id="ChB-M4-Dtw"/>
-                                                <constraint firstItem="X20-b9-bQT" firstAttribute="top" secondItem="pVX-oG-wMF" secondAttribute="bottom" id="QES-gS-2Ki"/>
-                                                <constraint firstItem="X20-b9-bQT" firstAttribute="leading" secondItem="J0z-Sa-zFr" secondAttribute="leading" constant="10" id="aqT-QN-kaL"/>
-                                                <constraint firstItem="pVX-oG-wMF" firstAttribute="leading" secondItem="J0z-Sa-zFr" secondAttribute="leading" constant="5" id="qjC-I8-yNw"/>
-                                                <constraint firstAttribute="trailing" secondItem="X20-b9-bQT" secondAttribute="trailing" constant="10" id="tlN-Df-SsB"/>
+                                                <constraint firstAttribute="trailing" secondItem="pVX-oG-wMF" secondAttribute="trailing" constant="30" id="9hA-92-frS"/>
+                                                <constraint firstAttribute="bottom" secondItem="X20-b9-bQT" secondAttribute="bottom" constant="10" id="ChB-M4-Dtw"/>
+                                                <constraint firstItem="X20-b9-bQT" firstAttribute="top" secondItem="pVX-oG-wMF" secondAttribute="bottom" constant="10" id="QES-gS-2Ki"/>
+                                                <constraint firstItem="X20-b9-bQT" firstAttribute="leading" secondItem="J0z-Sa-zFr" secondAttribute="leading" constant="40" id="aqT-QN-kaL"/>
+                                                <constraint firstItem="pVX-oG-wMF" firstAttribute="leading" secondItem="J0z-Sa-zFr" secondAttribute="leading" constant="30" id="qjC-I8-yNw"/>
+                                                <constraint firstAttribute="trailing" secondItem="X20-b9-bQT" secondAttribute="trailing" constant="40" id="tlN-Df-SsB"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="180" height="200"/>
+                                        <size key="customSize" width="252" height="200"/>
                                         <connections>
                                             <outlet property="ImagesCell" destination="pVX-oG-wMF" id="8tY-7B-KwQ"/>
                                             <outlet property="labelImage" destination="X20-b9-bQT" id="esz-H4-rN0"/>
@@ -77,7 +77,7 @@
                             <constraint firstItem="EAJ-PZ-eYZ" firstAttribute="bottom" secondItem="ISM-f8-M0K" secondAttribute="bottom" id="2QM-Ye-pPf"/>
                             <constraint firstItem="ISM-f8-M0K" firstAttribute="leading" secondItem="EAJ-PZ-eYZ" secondAttribute="leading" id="3d0-bh-yOJ"/>
                             <constraint firstItem="ISM-f8-M0K" firstAttribute="trailing" secondItem="EAJ-PZ-eYZ" secondAttribute="trailing" id="5YX-ii-ZPB"/>
-                            <constraint firstItem="ISM-f8-M0K" firstAttribute="top" secondItem="EAJ-PZ-eYZ" secondAttribute="top" id="dro-2F-RhL"/>
+                            <constraint firstItem="ISM-f8-M0K" firstAttribute="top" secondItem="EAJ-PZ-eYZ" secondAttribute="top" constant="20" id="dro-2F-RhL"/>
                             <constraint firstItem="EAJ-PZ-eYZ" firstAttribute="trailing" secondItem="ISM-f8-M0K" secondAttribute="trailing" id="tUs-Ik-6Qb"/>
                         </constraints>
                     </view>
@@ -89,7 +89,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NhH-O3-Pv3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2060.9302325581393" y="3.8626609442060089"/>
+            <point key="canvasLocation" x="2059.5348837209303" y="3.8626609442060089"/>
         </scene>
         <!--Album View Controller-->
         <scene sceneID="hfW-S1-igI">
@@ -264,14 +264,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="artistTrackCell" id="Xm9-RS-5E7" customClass="ArtistTrackTableViewCell" customModule="Deefy_Music" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="430" height="41"/>
+                                        <rect key="frame" x="0.0" y="50" width="430" height="41.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xm9-RS-5E7" id="kwQ-b7-vGw">
-                                            <rect key="frame" x="0.0" y="0.0" width="430" height="41"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="430" height="41.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DARIUUUUS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u98-YY-LeA">
-                                                    <rect key="frame" x="10" y="10" width="420" height="21"/>
+                                                    <rect key="frame" x="10" y="10.000000000000002" width="420" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -300,17 +300,17 @@
                                 <rect key="frame" x="0.0" y="240" width="430" height="224"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KaC-Jw-oRR">
-                                    <size key="itemSize" width="193" height="164"/>
+                                    <size key="itemSize" width="193" height="195"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="artistAlbumCell" id="ONw-oh-myB" customClass="ArtistAlbumCollectionViewCell" customModule="Deefy_Music" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="30" width="193" height="164"/>
+                                        <rect key="frame" x="0.0" y="14.666666666666666" width="193" height="195"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Z7Z-yz-hKP">
-                                            <rect key="frame" x="0.0" y="0.0" width="193" height="164"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="193" height="195"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HzS-72-w4h">
@@ -321,7 +321,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DARIUS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6PJ-43-Fms">
-                                                    <rect key="frame" x="66.666666666666671" y="143" width="60" height="13"/>
+                                                    <rect key="frame" x="66.666666666666671" y="143" width="60" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -336,6 +336,7 @@
                                                 <constraint firstItem="6PJ-43-Fms" firstAttribute="top" secondItem="HzS-72-w4h" secondAttribute="bottom" constant="5" id="t5R-wd-GWQ"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="193" height="195"/>
                                         <connections>
                                             <outlet property="albumCover" destination="HzS-72-w4h" id="LEh-Wn-C66"/>
                                             <outlet property="albumTitle" destination="6PJ-43-Fms" id="add-na-48o"/>
