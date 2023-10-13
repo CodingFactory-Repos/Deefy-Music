@@ -8,7 +8,8 @@
 import UIKit
 
 class LikedViewController: UIViewController {
-
+    @IBOutlet weak var likedTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

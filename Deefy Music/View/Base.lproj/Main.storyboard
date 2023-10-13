@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K3Z-96-74s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22503" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K3Z-96-74s">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22503"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,9 +11,9 @@
         <!--Register View Controller-->
         <scene sceneID="6DE-1B-LYS">
             <objects>
-                <viewController id="NGR-H2-hja" customClass="RegisterViewController" customModule="Deefy_Music" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="createAccount" id="NGR-H2-hja" customClass="RegisterViewController" customModule="Deefy_Music" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kVD-Dw-6TS">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GOE-2C-ltT">
@@ -33,7 +33,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M62-wW-u7S">
-                                <rect key="frame" x="80" y="587" width="233" height="35"/>
+                                <rect key="frame" x="80" y="563" width="233" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Continuer"/>
                                 <connections>
@@ -49,7 +49,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S'enregistrer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kt6-bZ-I64">
-                                <rect key="frame" x="99.666666666666686" y="143" width="194" height="39"/>
+                                <rect key="frame" x="99.666666666666686" y="202" width="194" height="39"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -101,7 +101,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Vous avez déjà un compte ? Se connecter" titleAlignment="center"/>
                                 <connections>
-                                    <segue destination="i5T-Rc-dJF" kind="modal" id="rZU-QT-CRZ"/>
+                                    <action selector="loginAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="viz-hy-NkP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qiR-J5-atC">
@@ -109,7 +109,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Créer un compte"/>
                                 <connections>
-                                    <segue destination="NGR-H2-hja" kind="modal" id="hi0-Ga-Vfq"/>
+                                    <action selector="createAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3XA-tO-2jt"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deefy Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmJ-mj-av8">
@@ -146,13 +146,13 @@
         <!--Login View Controller-->
         <scene sceneID="cJU-60-bgG">
             <objects>
-                <viewController id="i5T-Rc-dJF" customClass="LoginViewController" customModule="Deefy_Music" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginAccount" id="i5T-Rc-dJF" customClass="LoginViewController" customModule="Deefy_Music" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sVu-ZY-haP">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f7i-AS-M1R">
-                                <rect key="frame" x="80" y="300" width="233" height="34"/>
+                                <rect key="frame" x="80" y="359" width="233" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="233" id="hnT-of-oa5"/>
                                 </constraints>
@@ -163,7 +163,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="weB-lp-wkg">
-                                <rect key="frame" x="80" y="374" width="233" height="34"/>
+                                <rect key="frame" x="80" y="433" width="233" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -171,7 +171,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nb-ya-f7t">
-                                <rect key="frame" x="80" y="587" width="233" height="35"/>
+                                <rect key="frame" x="80" y="563" width="233" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Continuer"/>
                                 <connections>
@@ -179,7 +179,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se connecter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="108-Ga-HGK">
-                                <rect key="frame" x="97.666666666666671" y="146" width="197.66666666666663" height="39"/>
+                                <rect key="frame" x="97.666666666666671" y="205" width="197.66666666666663" height="39"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

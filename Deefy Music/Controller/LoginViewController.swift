@@ -8,6 +8,8 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    weak var delegate: ModalDelegate?
+
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var loginBtn: UIButton!
@@ -44,6 +46,7 @@ class LoginViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
             // Set the user defaults to logged in
             UserDefaults.standard.set(true, forKey: "isLogged")
+            delegate?.login()
         } else {
             // If it's not correct, shake the button
             let animation = CABasicAnimation(keyPath: "position")

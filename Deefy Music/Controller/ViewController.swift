@@ -8,7 +8,10 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController {
+protocol ModalDelegate: class {
+    func login()
+}
+class ViewController: UIViewController, ModalDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,11 +21,28 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("APPEARD")
         if (UserDefaults.standard.bool(forKey: "isLogged")) {
             let tabBarController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "tabBar")
             self.navigationController?.pushViewController(tabBarController, animated: true)
         }
         // Retrieve the tracks from the API
+    }
+    func login(){
+        if (UserDefaults.standard.bool(forKey: "isLogged")) {
+            let tabBarController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "tabBar")
+            self.navigationController?.pushViewController(tabBarController, animated: true)
+        }
+    }
+    @IBAction func createAccount(_ sender: Any) {
+        let createAccount = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "createAccount")
+        self.present(createAccount, animated: true, completion: nil)
+    }
+    @IBAction func loginAccount(_ sender: Any) {
+        let loginAccount = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginAccount") as? LoginViewController
+        loginAccount?.delegate = self
+        self.present(loginAccount!, animated: true, completion: nil)
+
     }
 }
 
