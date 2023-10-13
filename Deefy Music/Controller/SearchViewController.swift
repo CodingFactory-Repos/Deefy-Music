@@ -26,22 +26,40 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
        // Append an empty search
         filteredData = search
 
-        if (filteredData.isEmpty) {
-            let welcomeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-            welcomeLabel.text = welcomeText
-            welcomeLabel.textColor = UIColor.black
-            welcomeLabel.textAlignment = NSTextAlignment.center
-            self.SearchTableView.backgroundView = welcomeLabel
+        // if there is an item in the UserDefaults lastMusics
+        if let lastMusics = UserDefaults.standard.array(forKey: "lastMusics") as? [String] {
+            // lastMusics are only ID so we need to search them then append them to the filteredData
+            let spotifyAPIManager = SpotifyAPIManager()
+            for id in lastMusics {
+                spotifyAPIManager.searchForMusicWithID(id: id) { music in
+                    let authorAndFeats = music.artists as! [[String: Any]]
+                    let author = authorAndFeats[0]["name"] as! String
 
-            // Add an help label to explain how to search just below the welcome label
-            let helpLabel = UILabel(frame: CGRect(x: 0, y: -30, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-            helpLabel.text = helpText
-            helpLabel.textColor = UIColor.gray
-            helpLabel.textAlignment = NSTextAlignment.center
-            self.SearchTableView.backgroundView?.addSubview(helpLabel)
-
-            self.SearchTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+                    self.filteredData.append(Search(image: music.album.image, artist: "Music · \(author)", title: music.title, item: music, type: "music"))
+                    
+                    // Refresh the tableView
+                    DispatchQueue.main.async {
+                        self.SearchTableView.reloadData()
+                    }
+                }
+            }
         }
+
+        let welcomeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+        welcomeLabel.text = welcomeText
+        welcomeLabel.textColor = UIColor.black
+        welcomeLabel.textAlignment = NSTextAlignment.center
+        self.SearchTableView.backgroundView = welcomeLabel
+
+        // Add an help label to explain how to search just below the welcome label
+        let helpLabel = UILabel(frame: CGRect(x: 0, y: -30, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+        helpLabel.text = helpText
+        helpLabel.textColor = UIColor.gray
+        helpLabel.textAlignment = NSTextAlignment.center
+        self.SearchTableView.backgroundView?.addSubview(helpLabel)
+
+        self.SearchTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+
         SearchTableView.dataSource = self
         SearchTableView.delegate = self
         searchBar.delegate = self
@@ -77,11 +95,41 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                     let artistViewController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "artistView") as! ArtistViewController
                     artistViewController.artist = filteredData[indexPath.row].item as! Artist
                     self.navigationController?.pushViewController(artistViewController, animated: true)
-                default:
+                case "music":
+                    if let musicVC = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as? MusicViewController {
+
+                        if var lastMusics = UserDefaults.standard.array(forKey: "lastMusics") as? [String] {
+                            if lastMusics.count >= 10 {
+                                lastMusics.removeFirst()
+                            }
+                            if let search = filteredData[indexPath.row].item as? Music {
+                                lastMusics.append(search.id)
+                                UserDefaults.standard.set(lastMusics, forKey: "lastMusics")
+                            }
+                        } else {
+                            if let search = filteredData[indexPath.row].item as? Music {
+                                let newSearch = [search.id]
+                                UserDefaults.standard.set(newSearch, forKey: "lastMusics")
+                            }
+                        }
+
+                        musicVC.selectedItem = filteredData[indexPath.row] as? Search
+                        self.present(musicVC, animated: true, completion: nil)
+                    }
+                case "podcast":
                     if let musicVC = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as? MusicViewController {
                         musicVC.selectedItem = filteredData[indexPath.row] as? Search
                         self.present(musicVC, animated: true, completion: nil)
                     }
+                default:
+                    // alert message
+                    let alert = UIAlertController(title: "Error", message: "This item is not available", preferredStyle: .alert)
+
+                    // add an action (button)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+                    // show the alert
+                    self.present(alert, animated: true, completion: nil)
                 }
             } else {
                 // Handle the case when indexPath.row is out of bounds
