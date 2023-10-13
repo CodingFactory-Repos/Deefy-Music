@@ -21,7 +21,6 @@ class ViewController: UIViewController, ModalDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("APPEARD")
         if (UserDefaults.standard.bool(forKey: "isLogged")) {
             let tabBarController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "tabBar")
             self.navigationController?.pushViewController(tabBarController, animated: true)
