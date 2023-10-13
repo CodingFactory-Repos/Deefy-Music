@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22503" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wzf-pz-4Tf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wzf-pz-4Tf">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22503"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -117,14 +117,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="albumCell" id="y80-aP-RUa" customClass="AlbumTableViewCell" customModule="Deefy_Music" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="430" height="31.333333969116211"/>
+                                        <rect key="frame" x="0.0" y="50" width="430" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y80-aP-RUa" id="EQ2-B4-yQq">
-                                            <rect key="frame" x="0.0" y="0.0" width="430" height="31.333333969116211"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="430" height="31"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOx-sR-oXp">
-                                                    <rect key="frame" x="30" y="5" width="390" height="21.333333333333332"/>
+                                                    <rect key="frame" x="30" y="5" width="390" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -167,7 +167,7 @@
             </objects>
             <point key="canvasLocation" x="3006.8702290076335" y="3.5211267605633805"/>
         </scene>
-        <!--Library-->
+        <!--Liked-->
         <scene sceneID="Kau-af-Ubh">
             <objects>
                 <viewController id="gLn-8T-c1V" customClass="LikedViewController" customModule="Deefy_Music" customModuleProvider="target" sceneMemberID="viewController">
@@ -186,10 +186,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="430" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cPB-U3-TnJ">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Darius" translatesAutoresizingMaskIntoConstraints="NO" id="cPB-U3-TnJ">
                                                     <rect key="frame" x="5" y="5" width="50" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="AEs-ZS-CNK"/>
+                                                        <constraint firstAttribute="height" constant="50" id="lzq-i7-ddr"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZNu-BH-PEh">
@@ -235,7 +236,10 @@
                             <constraint firstItem="Q5k-D4-Kjo" firstAttribute="trailing" secondItem="trf-IR-JQM" secondAttribute="trailing" id="kld-FH-HAE"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Library" image="bookmark.fill" catalog="system" id="bDC-Dz-plL"/>
+                    <tabBarItem key="tabBarItem" title="Liked" image="heart.fill" catalog="system" id="bDC-Dz-plL"/>
+                    <connections>
+                        <outlet property="likedTableView" destination="trf-IR-JQM" id="QmQ-BG-s0m"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JTH-xF-TdW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -260,14 +264,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="artistTrackCell" id="Xm9-RS-5E7" customClass="ArtistTrackTableViewCell" customModule="Deefy_Music" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="430" height="41.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="50" width="430" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xm9-RS-5E7" id="kwQ-b7-vGw">
-                                            <rect key="frame" x="0.0" y="0.0" width="430" height="41.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="430" height="41"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DARIUUUUS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u98-YY-LeA">
-                                                    <rect key="frame" x="10" y="9.9999999999999982" width="420" height="21.333333333333329"/>
+                                                    <rect key="frame" x="10" y="10" width="420" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -561,7 +565,7 @@
     </scenes>
     <resources>
         <image name="Darius" width="405" height="239"/>
-        <image name="bookmark.fill" catalog="system" width="110" height="128"/>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>
