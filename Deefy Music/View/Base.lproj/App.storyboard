@@ -117,14 +117,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="albumCell" id="y80-aP-RUa" customClass="AlbumTableViewCell" customModule="Deefy_Music" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="430" height="30.666666030883789"/>
+                                        <rect key="frame" x="0.0" y="50" width="430" height="31.333333969116211"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y80-aP-RUa" id="EQ2-B4-yQq">
-                                            <rect key="frame" x="0.0" y="0.0" width="430" height="30.666666030883789"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="430" height="31.333333969116211"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOx-sR-oXp">
-                                                    <rect key="frame" x="30" y="5" width="390" height="20.666666666666668"/>
+                                                    <rect key="frame" x="30" y="5" width="390" height="21.333333333333332"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -250,7 +250,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="etB-ax-nmZ">
-                                <rect key="frame" x="152.66666666666666" y="59" width="124.99999999999997" height="125"/>
+                                <rect key="frame" x="153" y="90" width="125" height="125"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="29J-0u-1LY">
@@ -259,20 +259,25 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="artistTrackCell" id="Xm9-RS-5E7" customClass="ArtistTrackTableViewCell" customModule="Deefy_Music" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="430" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="430" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xm9-RS-5E7" id="kwQ-b7-vGw">
-                                            <rect key="frame" x="0.0" y="0.0" width="430" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="430" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u98-YY-LeA">
-                                                    <rect key="frame" x="5" y="10.000000000000002" width="425" height="20.666666666666671"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DARIUUUUS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u98-YY-LeA">
+                                                    <rect key="frame" x="50" y="0.0" width="380" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="u98-YY-LeA" secondAttribute="bottom" id="65m-Ph-sK2"/>
+                                                <constraint firstItem="u98-YY-LeA" firstAttribute="top" secondItem="kwQ-b7-vGw" secondAttribute="top" id="QB5-Rc-rSs"/>
+                                                <constraint firstAttribute="trailing" secondItem="u98-YY-LeA" secondAttribute="trailing" id="cMy-Fx-4ng"/>
+                                                <constraint firstItem="u98-YY-LeA" firstAttribute="leading" secondItem="kwQ-b7-vGw" secondAttribute="leading" constant="50" id="v1i-23-7qE"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="trackName" destination="u98-YY-LeA" id="8uC-Ep-Z23"/>
@@ -283,12 +288,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUe-rF-52S">
                                 <rect key="frame" x="198.66666666666666" y="480" width="33" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqU-9E-ESC">
-                                <rect key="frame" x="194.33333333333334" y="199" width="41.333333333333343" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -341,6 +340,12 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqU-9E-ESC">
+                                <rect key="frame" x="195" y="223" width="41.333333333333485" height="20.333333333333258"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fis-5k-VWP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

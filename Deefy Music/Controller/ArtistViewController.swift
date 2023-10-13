@@ -33,21 +33,25 @@ class ArtistViewController: UIViewController, UICollectionViewDataSource, UIColl
         tracksCollections.delegate = self
 
         let spotifyManager = SpotifyAPIManager()
+        
         spotifyManager.getAlbumsFromArtist(artistId: artist.id) { album in
             if let album = album as? [Album] {
                 self.albums = album
+                DispatchQueue.main.async {
+                    self.albumCollection.reloadData()
+                }
             }
         }
         spotifyManager.getTopTracksFromArtist(artistId: artist.id){ track in
-            print("AHAHAHAHAHAHAHAHAH")
+            print(track)
             if let music = track as? [Music] {
                 self.tracks = music
+                DispatchQueue.main.async {
+                    self.tracksCollections.reloadData()
+                }
             }
         }
-        DispatchQueue.main.async {
-            self.tracksCollections.reloadData()
-            self.albumCollection.reloadData()
-        }
+        
     }
 
     
@@ -77,6 +81,15 @@ class ArtistViewController: UIViewController, UICollectionViewDataSource, UIColl
         let cell = tableView.dequeueReusableCell(withIdentifier: "artistTrackCell") as! ArtistTrackTableViewCell
         cell.trackName.text = self.tracks[indexPath.row].title
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let player = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as! MusicViewController
+
+        var MyMusic: Search?
+        MyMusic = Search(image: artist.image, artist: artist.name, title: self.tracks[indexPath.row].title, item: self.tracks[indexPath.row], type: "music")
+        player.selectedItem = MyMusic as? Search
+        self.present(player, animated: true, completion: nil)
     }
 
     
