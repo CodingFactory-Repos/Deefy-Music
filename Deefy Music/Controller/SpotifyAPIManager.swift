@@ -224,6 +224,51 @@ public class SpotifyAPIManager {
         task.resume()
     }
 
+    func searchForMusicWithID(id: String, completion: @escaping (Music) -> Void) {
+        let url = URL(string: "https://api.spotify.com/v1/tracks/\(id)")!
+        let token = retrieveToken()
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            guard let response = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+
+            if (200...299).contains(response.statusCode) {
+                // Successful response
+                print("Request was successful with status code: \(response.statusCode)")
+            } else {
+                // Error response
+                print("Server error with status code: \(response.statusCode)")
+                print("Error reason: \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))")
+            }
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let item = json as? [String: Any] {
+                        if let albumId = (item["album"] as? [String: Any])?["id"] as? String {
+                            self.getAlbumFromId(albumId: albumId) { album in
+                                let titleAlbum = album
+                                let track = Music(id: item["id"] as! String, title: item["name"] as! String, artists: item["artists"] as Any, album: titleAlbum as Album, duration: item["duration_ms"] as! Int)
+                                completion(track)
+                            }
+                        }
+                    }
+                } catch {
+                    print("JSON error: \(error.localizedDescription)")
+                }
+            }
+        }
+        task.resume()
+    }
+
     func sortResults(results: [[String: Any]]) -> [[String: Any]] {
         // Filter items with popularity = -1
         let itemsWithPopularityMinus1 = results.filter { ($0["popularity"] as! Int) == -1 }
