@@ -10,6 +10,8 @@ import AVFoundation
 import AVKit
 
 class MusicViewController: UIViewController {
+    weak var delegateLike: ModalLikedDelegate?
+
 
     @IBOutlet weak var currentLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
@@ -18,6 +20,13 @@ class MusicViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     var audioPlayer: AVPlayer!
     var selectedItem: Search?
+
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+        delegateLike?.loadLike()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

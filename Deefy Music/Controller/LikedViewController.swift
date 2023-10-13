@@ -7,9 +7,40 @@
 
 import UIKit
 
+protocol ModalLikedDelegate: class {
+    func loadLike()
+}
 class LikedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var likedTableView: UITableView!
 
+    func loadLike(){
+        print("loadLike")
+        self.liked = []
+        self.likedMusic = []
+        if let liked = UserDefaults.standard.array(forKey: "liked") as? [[String: String]] {
+            self.liked = liked
+        }
+
+        print(liked)
+
+        let spotifyAPIManager = SpotifyAPIManager()
+
+        for id in liked {
+            spotifyAPIManager.searchForMusicWithID(id: id["id"]!) { track in
+                if let music = track as? Music {
+                    let authorAndFeats = music.artists as! [[String: Any]]
+                    let author = authorAndFeats[0]["name"] as! String
+
+                    self.likedMusic.append(Search(image: music.album.image, artist: "Music · \(author)", title: music.title, item: music, type: "music"))
+
+                    // Refresh the tableView
+                    DispatchQueue.main.async {
+                        self.likedTableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.likedMusic.count
     }
@@ -39,33 +70,13 @@ class LikedViewController: UIViewController, UITableViewDataSource, UITableViewD
         likedTableView.delegate = self
 
 
-        if let liked = UserDefaults.standard.array(forKey: "liked") as? [[String: String]] {
-            self.liked = liked
-        }
-
-        print(liked)
-
-        let spotifyAPIManager = SpotifyAPIManager()
-
-        for id in liked {
-            spotifyAPIManager.searchForMusicWithID(id: id["id"]!) { track in
-                if let music = track as? Music {
-                    let authorAndFeats = music.artists as! [[String: Any]]
-                    let author = authorAndFeats[0]["name"] as! String
-
-                    self.likedMusic.append(Search(image: music.album.image, artist: "Music · \(author)", title: music.title, item: music, type: "music"))
-
-                    // Refresh the tableView
-                    DispatchQueue.main.async {
-                        self.likedTableView.reloadData()
-                    }
-                }
-            }
-        }
-
         // Do any additional setup after loading the view.
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadLike()
+    }
 
     /*
     // MARK: - Navigation

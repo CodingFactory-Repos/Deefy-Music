@@ -37,7 +37,6 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
 
     @IBAction func loginAction(_ sender: Any) {
         // Check if the email and password are correct and match the user defaults
