@@ -66,13 +66,17 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
 
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             if indexPath.row < filteredData.count {
-                print(filteredData[indexPath.row])
+//                print(filteredData[indexPath.row])
 
                 switch filteredData[indexPath.row].type {
                 case "album":
                     let albumViewController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "album") as! AlbumViewController
                     albumViewController.album = filteredData[indexPath.row].item as! Album
                     self.navigationController?.pushViewController(albumViewController, animated: true)
+                case "artist":
+                    let artistViewController = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "artistView") as! ArtistViewController
+                    artistViewController.artist = filteredData[indexPath.row].item as! Artist
+                    self.navigationController?.pushViewController(artistViewController, animated: true)
                 default:
                     if let musicVC = UIStoryboard(name: "App", bundle: nil).instantiateViewController(withIdentifier: "Music") as? MusicViewController {
                         musicVC.selectedItem = filteredData[indexPath.row] as? Search

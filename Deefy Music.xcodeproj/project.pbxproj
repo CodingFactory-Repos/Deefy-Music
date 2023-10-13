@@ -28,6 +28,9 @@
 		9B220FC55085D4174946395A /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B220F30F17AAB7051BF0F1D /* Search.swift */; };
 		A0554A072AD6DCEA00A8B024 /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0554A062AD6DCEA00A8B024 /* LikedViewController.swift */; };
 		A0554A092AD6DD3000A8B024 /* LikedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0554A082AD6DD3000A8B024 /* LikedTableViewCell.swift */; };
+		A7B250452AD85CB000555F3E /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B250442AD85CB000555F3E /* ArtistViewController.swift */; };
+		A7B250472AD85D1A00555F3E /* ArtistAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B250462AD85D1A00555F3E /* ArtistAlbumCollectionViewCell.swift */; };
+		A7B250492AD85D4D00555F3E /* ArtistTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B250482AD85D4D00555F3E /* ArtistTrackTableViewCell.swift */; };
 		FF94226F2AD82A1800F35EC2 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF94226E2AD82A1800F35EC2 /* AlbumViewController.swift */; };
 		FF9422712AD82A3100F35EC2 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9422702AD82A3100F35EC2 /* AlbumTableViewCell.swift */; };
 		FF9422752AD82D0800F35EC2 /* App.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF9422742AD82D0800F35EC2 /* App.storyboard */; };
@@ -62,6 +65,9 @@
 		9B220F30F17AAB7051BF0F1D /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		A0554A062AD6DCEA00A8B024 /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LikedViewController.swift; path = "Deefy Music/Controller/LikedViewController.swift"; sourceTree = SOURCE_ROOT; };
 		A0554A082AD6DD3000A8B024 /* LikedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedTableViewCell.swift; sourceTree = "<group>"; };
+		A7B250442AD85CB000555F3E /* ArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
+		A7B250462AD85D1A00555F3E /* ArtistAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
+		A7B250482AD85D4D00555F3E /* ArtistTrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTrackTableViewCell.swift; sourceTree = "<group>"; };
 		FF94226E2AD82A1800F35EC2 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		FF9422702AD82A3100F35EC2 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
 		FF9422742AD82D0800F35EC2 /* App.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = App.storyboard; path = Base.lproj/App.storyboard; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 		A0E4539F2AD5890E008ACA2B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A7B250482AD85D4D00555F3E /* ArtistTrackTableViewCell.swift */,
 				A0554A062AD6DCEA00A8B024 /* LikedViewController.swift */,
 				FFA440F72AD6B2DC006AAA3F /* MusicViewController.swift */,
 				FFA440F32AD693E2006AAA3F /* SearchTableViewCell.swift */,
@@ -145,6 +152,8 @@
 				924BAFBFC82700333D9D1C42 /* YoutubeAPIManager.swift */,
 				FF94226E2AD82A1800F35EC2 /* AlbumViewController.swift */,
 				FF9422702AD82A3100F35EC2 /* AlbumTableViewCell.swift */,
+				A7B250442AD85CB000555F3E /* ArtistViewController.swift */,
+				A7B250462AD85D1A00555F3E /* ArtistAlbumCollectionViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -255,6 +264,7 @@
 				5F4EF59E2AD53522007AAD82 /* AppDelegate.swift in Sources */,
 				FF9422712AD82A3100F35EC2 /* AlbumTableViewCell.swift in Sources */,
 				A0554A092AD6DD3000A8B024 /* LikedTableViewCell.swift in Sources */,
+				A7B250472AD85D1A00555F3E /* ArtistAlbumCollectionViewCell.swift in Sources */,
 				5F4EF5A02AD53522007AAD82 /* SceneDelegate.swift in Sources */,
 				FFA440F22AD691FC006AAA3F /* SearchViewController.swift in Sources */,
 				FF94226F2AD82A1800F35EC2 /* AlbumViewController.swift in Sources */,
@@ -270,7 +280,9 @@
 				924BA2D94D25B1D6CF796280 /* Album.swift in Sources */,
 				924BA72F7345B149EE247AD0 /* SpotifyAPIManager.swift in Sources */,
 				924BA9FA3C1E1C2D629B46A8 /* YoutubeAPIManager.swift in Sources */,
+				A7B250452AD85CB000555F3E /* ArtistViewController.swift in Sources */,
 				924BAB2615129A0D2EF77B6E /* Artist.swift in Sources */,
+				A7B250492AD85D4D00555F3E /* ArtistTrackTableViewCell.swift in Sources */,
 				924BAC25F0ABA8F681148DDD /* Playlist.swift in Sources */,
 				924BA30D6C1A29EE036CE502 /* Podcast.swift in Sources */,
 			);

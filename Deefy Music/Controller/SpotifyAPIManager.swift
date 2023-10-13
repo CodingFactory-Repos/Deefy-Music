@@ -407,19 +407,29 @@ public class SpotifyAPIManager {
             if let data = data {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    let items = (json as! [String: Any])as! [String: Any]
-                    let items2 = items["tracks"] as! [[String: Any]]
-                    var topMusics = [] as [Music]
-                    for item in items2 {
-                        let albumId = (item["album"] as! [String: Any])["id"] as! String
-                        self.getAlbumFromId(albumId: albumId) { album in
-                            let titleAlbum = album
-                            let track = Music(id: item["id"] as! String, title: item["name"] as! String, artists: item["artists"] as Any, album: titleAlbum as Album, duration: item["duration_ms"] as! Int)
-                            topMusics.append(track)
+                    if let items = json as? [String: Any], let items2 = items["tracks"] as? [[String: Any]] {
+                        var topMusics = [Music]()
+                        let group = DispatchGroup() // Pour suivre le nombre de requêtes en cours
+                        
+                        for item in items2 {
+                            if let albumId = (item["album"] as? [String: Any])?["id"] as? String {
+                                group.enter() // Déclarez l'entrée dans le groupe avant la requête asynchrone
+                                self.getAlbumFromId(albumId: albumId) { album in
+                                    let titleAlbum = album
+                                    let track = Music(id: item["id"] as? String ?? "",
+                                                      title: item["name"] as? String ?? "",
+                                                      artists: item["artists"] as Any,
+                                                      album: titleAlbum as Album,
+                                                      duration: item["duration_ms"] as? Int ?? 0)
+                                    topMusics.append(track)
+                                    group.leave() // Signalez la sortie du groupe après avoir traité la réponse
+                                }
+                            }
                         }
-
-                        if topMusics.count == items2.count {
-                            completion(topMusics)
+                        
+                        // À ce stade, nous attendons que toutes les requêtes asynchrones se terminent
+                        group.notify(queue: .main) {
+                            completion(topMusics) // Une fois que tout est terminé, appelez la complétion
                         }
                     }
                 } catch {
@@ -465,7 +475,9 @@ public class SpotifyAPIManager {
                         }
 
                         let album = Album(id: item["id"] as! String, name: item["name"] as! String, artists: item["artists"] as Any, image: imageUrl as! String, releaseDate: item["release_date"] as! String, totalTracks: item["total_tracks"] as! Int)
-                        albums.append(album)
+                        if (album.totalTracks > 2) {
+                            albums.append(album)
+                        }
                         completion(albums)
                     }
                 } catch {
